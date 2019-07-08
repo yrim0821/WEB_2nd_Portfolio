@@ -1,0 +1,91 @@
+<template>
+  <v-app style="position:absolute">
+    <div class="toolbar">
+      <v-toolbar id="header">
+        <v-toolbar-side-icon
+        @click.stop="sideNav = !sideNav"
+        class="hidden-sm-and-up"><v-icon>menu</v-icon>
+      </v-toolbar-side-icon>
+      <v-toolbar-title>
+        <router-link to="/">JU YEON</router-link>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-xs-only">
+        <v-btn flat><router-link to="/portfolio">Portfolio</router-link></v-btn>
+        <v-btn flat><router-link to="/post">Post</router-link></v-btn>
+        <v-btn flat><router-link to="/login">login</router-link></v-btn>
+<v-btn v-on:click="bookmarksite('ujj', 'http://ujj.com')"><v-icon>bookmark</v-icon></v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+  </div>
+  <v-navigation-drawer temporary style="position:fixed" v-model="sideNav">
+    <v-list>
+      <v-list-tile
+      v-for="item in menuItems"
+      :key="item.title"
+      :to="item.link">
+      <v-list-tile-action>
+        <v-icon>{{ item.icon }}</v-icon>
+      </v-list-tile-action>
+      <v-list-tile-content>{{ item.title }}</v-list-tile-content>
+    </v-list-tile>
+  </v-list>
+</v-navigation-drawer>
+</v-app>
+
+</template>
+
+<script>
+export default {
+  name: 'MainHeader',
+  data () {
+    return{
+      sideNav: false,
+      menuItems: [
+        { icon: 'home', title: 'home', link: '/' },
+        { icon: 'portrait', title: 'Portfolio', link: '/portfolio' },
+        { icon: 'photo_filter', title: 'Post', link: '/post' },
+        { icon: 'exit_to_app', title: 'Login', link: '/login' }
+      ]
+    }
+  },
+  methods: {
+  bookmarksite(title, url) {
+    var agent = navigator.userAgent.toLowerCase();
+    var name = navigator.appName;
+
+    // MS 계열 브라우저를 구분  IE 11+, IE 11,Edge
+    if(name === 'Microsoft Internet Explorer' || agent.indexOf('trident') > -1 || agent.indexOf('edge/') > -1) {
+       window.external.AddFavorite(url, title);
+    } else if(agent.indexOf('safari') > -1) { // Chrome or Safari
+      if(agent.indexOf('chrome') > -1) { // Chrome
+        alert("Ctrl+D키를 누르시면 즐겨찾기에 추가하실 수 있습니다.");
+      }else{
+        alert("Ctrl+D키를 누르시면 즐겨찾기에 추가하실 수 있습니다.");
+      }
+    } else if(agent.indexOf('firefox') > -1) { // Firefox
+      alert("Ctrl+D키를 누르시면 즐겨찾기에 추가하실 수 있습니다.");
+      window.sidebar.addPanel(title, url, " ");
+    } else if (window.opera && window.print) { // opera
+        var elem = document.createElement('a');
+        elem.setAttribute('href', url);
+        elem.setAttribute('title', title);
+        elem.setAttribute('rel', 'sidebar');
+        elem.click();
+      }
+  }
+}
+}
+</script>
+<style>
+#header{
+  position: fixed;
+  z-index: 6;
+  background-color: white;
+  width:100%;
+}
+a{
+  text-decoration: none;
+  font-size: 20px;
+}
+</style>
