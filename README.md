@@ -1,5 +1,16 @@
 # ssafy
 
+```text
+*담당개발
+JIRA/Gitlab Graph - 김유림
+GITLAB/Imgur - 김영훈
+Login/Sign Up - 지경민
+날씨 API/Page web log setting - 석주연
+자동번역 - 이수경
+```
+
+
+
 ## Project setup
 ```
 npm install 
@@ -7,6 +18,9 @@ npm install -g yarn
 npm install -g @vue/cli
 npm install -g vue
 npm install -g firebase-tools
+----- * -----
+npm install requests(WARN)
+npm install imgurpython(ERR!)
 ```
 
 ### Compiles and hot-reloads for development
@@ -22,36 +36,36 @@ npm run build
 
 ### Req. 1-1
 ```
-기능명 : header, footer 구현
-진행도 : 100%
-구현 날짜 : 2019/07/01
+기능명 : 
+진행도 : 
+구현 날짜 : 
 ```
 
 ### Req. 1-2
 ```
-기능명 : header 영역에 블로그 제목 노출 구현
-진행도 : 100%
-구현 날짜 : 2019/07/01
+기능명 : 
+진행도 : 
+구현 날짜 : 
 ```
 
 ### Req. 1-3
 ```
-기능명 : 스크롤시 헤더가 같이 움직이도록 구현
-진행도 : 100%
-구현 날짜 : 2019/07/02
+기능명 : 
+진행도 : 
+구현 날짜 : 
 ```
 
 ### Req. 1-4
 ```
-기능명 : 메인 이미지 영역이 새로고침시 마다 변경 되도록 구현
-진행도 : 100%
-구현 날짜 : 2019/07/02
+기능명 : 
+진행도 : 
+구현 날짜 : 
 ```
 
 ### Req. 1-5
 ```
-기능명 : 반응형 웹 사이트 구현
-진행도 : 20%
-구현 날짜 : 2019/07/02 ~
+기능명 : 
+진행도 : 
+구현 날짜 : 
 ```
 
