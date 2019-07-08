@@ -68,5 +68,8 @@ export default {
 		}).catch(function(error) {
 			console.error('[Google Login Error]', error)
 		})
+	},
+	signUp(){
+
 	}
 }

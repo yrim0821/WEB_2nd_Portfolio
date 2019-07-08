@@ -5,6 +5,7 @@ import PostPage from './views/PostPage.vue'
 import PortfolioPage from './views/PortfolioPage.vue'
 import LoginPage from './views/LoginPage.vue'
 import Portfoliowirter from './views/Portfoliowirter.vue'
+import SignUpPage from './views/SignUpPage.vue'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
 			path: '/portfoliowirter',
 			name: 'portfoliowirter',
 			component: Portfoliowirter
+		},
+		{
+			path: '/SignUpPage',
+			name: 'SignUpPage',
+			component: SignUpPage
 		}
   ]
 })
