@@ -10,6 +10,7 @@
         <router-link to="/">JU YEON</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <div id="google_translate_element"></div>
       <v-toolbar-items class="hidden-xs-only">
         <v-btn flat><router-link to="/portfolio">Portfolio</router-link></v-btn>
         <v-btn flat><router-link to="/post">Post</router-link></v-btn>
@@ -50,6 +51,7 @@ export default {
     }
   },
   methods: {
+
   bookmarksite(title, url) {
     var agent = navigator.userAgent.toLowerCase();
     var name = navigator.appName;

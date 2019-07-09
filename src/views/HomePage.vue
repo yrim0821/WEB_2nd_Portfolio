@@ -68,7 +68,7 @@ SSAFY 1기 석주연입니다.
   import PostList from '../components/PostList'
   import RepositoryList from '../components/RepositoryList'
   import clock from '../components/clock'
-
+  import axios from 'axios';
   export default {
     name: 'HomePage',
     components: {
@@ -78,12 +78,25 @@ SSAFY 1기 석주연입니다.
       RepositoryList,
       clock
     },
+    created(){
+      axios.get('http://localhost:8080')
+      .then(response=>(this.info=response))
+      .catch()
+    },
+    data(){
+      return{
+        info:null
+      }
+    },
     methods: {
       getImgUrl(img) {
         return require('../assets/' + img)
-      },
+      }
     }
   }
+
+
+
   !function(d,s,id){
     var js,fjs=d.getElementsByTagName(s)[0];
     if(!d.getElementById(id)){

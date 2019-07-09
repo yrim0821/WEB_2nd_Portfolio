@@ -48,6 +48,7 @@ export default {
     BackToTop
   }
 }
+
 </script>
 <style>
 .btn-to-top {
