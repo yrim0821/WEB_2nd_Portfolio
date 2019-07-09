@@ -64,24 +64,40 @@ export default {
       loginPassword: '',
       signupEmail: '',
       signupPassword: '',
-      dialog: false
+      dialog: false,
+      user: firebase.auth().currentUser
     }
    },
    components: {},
    methods: {
     async loginWithMail(){
+      firebase.auth().signInWithEmailAndPassword(this.loginEmail, this.loginPassword)
+      .then((user)=>{
 
+        this.$store.state.accessToken = user.user.refreshToken
+        this.$store.state.user = user.user.email
+        alert(this.$store.state.user + " 님 로그인 되었습니다")
+        this.$router.replace('/')
+
+      })
+      .catch((error)=>{
+        alert(error)
+      })
 
     },
       async loginWithGoogle() {
          const result = await FirebaseService.loginWithGoogle()
          this.$store.state.accessToken = result.credential.accessToken
          this.$store.state.user = result.user
+      alert(this.$store.state.user.displayName + " 님 로그인 되었습니다")
+      this.$router.replace('/')
       },
     async loginWithFacebook() {
          const result = await FirebaseService.loginWithFacebook()
          this.$store.state.accessToken = result.credential.accessToken
          this.$store.state.user = result.user
+      alert(this.$store.state.user.displayName + " 님 로그인 되었습니다")
+      this.$router.replace('/')
       },
     signUp(){
       firebase.auth().createUserWithEmailAndPassword(this.signupEmail, this.signupPassword)
@@ -96,7 +112,7 @@ export default {
 
    },
    mounted() {
-      console.log(this.$store.state)
+    this.user = firebase.auth().currentUser;
    }
 }
 </script>

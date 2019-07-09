@@ -59,16 +59,6 @@ export default {
          created_at: firebase.firestore.FieldValue.serverTimestamp()
       })
    },
-   loginWithMail() {
-      let provider = new firebase.auth.loginWithMail()
-      return firebase.auth().signInWithPopup(provider).then(function(result) {
-         let accessToken = result.credential.accessToken
-         let user = result.user
-         return result
-      }).catch(function(error) {
-         console.error('[Login Error]', error)
-      })
-   },
    loginWithGoogle() {
       let provider = new firebase.auth.GoogleAuthProvider()
       return firebase.auth().signInWithPopup(provider).then(function(result) {

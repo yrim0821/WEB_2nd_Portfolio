@@ -60,7 +60,8 @@
   import PostList from '../components/PostList'
   import RepositoryList from '../components/RepositoryList'
   import clock from '../components/clock'
-
+  import firebase from 'firebase/app'
+  
   export default {
     name: 'HomePage',
     components: {

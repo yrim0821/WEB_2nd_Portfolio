@@ -27,7 +27,7 @@ export default {
       Repository
    },
    mounted() {
-      this.getGitlabRepos('myccpb08')
+      this.getGitlabRepos('5yRamVkqs4Z4bq-G1roY')
    },
    methods: {
       async getGitlabRepos(userName) {
