@@ -24,7 +24,7 @@ import FirebaseService from '@/services/FirebaseService'
 export default {
 	name: 'PortfoliosList',
 	props: {
-		limits: {type: Number, default: 3},
+		limits: {type: Number, default: 4},
     loadMore: {type: Boolean, default: false}
 	},
 	data() {
