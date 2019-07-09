@@ -7,15 +7,14 @@
       <!-- About Me -->
       <v-layout my-5>
         <v-flex class="aboutMe" :class="$mq" xs8>
-          <h2 class="headline mb-3">About Me</h2>
+          <h2 class="headline mb-3">About Us</h2>
           <p class="mr-4" v-line-clamp:20="5">안녕하세요!
-SSAFY 1기 석주연입니다.
-경북대학교 전자공학과를 졸업해서 웹 개발에 대해 배운지 얼마안됐지만,
-부족한 점이 많지만 차근차근 배워서 한 사람의 몫 이상을 해내는 개발자가 되고싶습니다.
-잘 부탁드립니다 : )</p>
+            구미 통합 1반 6조입니다. 우리는 다양한 전공자들로 구성되어 있습니다.<br>
+            다양한 전공자들이 모여 그룹을 형성하기란 쉽지 않은 일입니다.<br>
+            우리 조의 콘셉트는 서로가 서로를 포용하며 조화를 이루는 것입니다.</p>
           </v-flex>
           <v-flex class="profileImg" :class="$mq" xs4>
-            <v-img :src="getImgUrl('profile.png')" aspect-ratio="1.5" />
+            <v-img :src="getImgUrl('harmony.png')" aspect-ratio="1.5" />
           </v-flex>
         </v-layout>
 
@@ -23,13 +22,6 @@ SSAFY 1기 석주연입니다.
         <v-layout my-5>
           <v-flex xs12>
             <clock/>
-          </v-flex>
-        </v-layout>
-
-        <!--weather-->
-        <v-layout my-5>
-          <v-flex xs12>
-            <a class="weatherwidget-io" href="https://forecast7.com/en/36d12128d34/gumi-si/" data-label_1="GUMI" data-label_2="WEATHER" data-theme="weather_one" >GUMI WEATHER</a>
           </v-flex>
         </v-layout>
 
@@ -80,7 +72,7 @@ SSAFY 1기 석주연입니다.
     },
     methods: {
       getImgUrl(img) {
-        return require('../assets/' + img)
+        return require('../assets/team6/logo/' + img)
       },
     }
   }

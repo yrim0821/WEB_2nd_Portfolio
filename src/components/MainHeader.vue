@@ -7,7 +7,7 @@
         class="hidden-sm-and-up"><v-icon>menu</v-icon>
       </v-toolbar-side-icon>
       <v-toolbar-title>
-        <router-link to="/">JU YEON</router-link>
+        <router-link to="/"><v-img id="breadth_logo" :src="getImgUrl('breadth_logo.png')"/></router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
@@ -75,6 +75,9 @@ export default {
     }
   },
   methods: {
+    getImgUrl(img) {
+      return require('../assets/team6/logo/' + img)
+    },
   bookmarksite(title, url) {
     var agent = navigator.userAgent.toLowerCase();
     var name = navigator.appName;
@@ -118,6 +121,9 @@ export default {
 }
 </script>
 <style>
+#breadth_logo{
+  width: 140px;
+}
 #header{
   position: fixed;
   z-index: 6;
