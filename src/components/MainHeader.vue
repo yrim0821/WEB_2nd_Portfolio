@@ -10,6 +10,7 @@
         <router-link to="/"><v-img id="breadth_logo" :src="getImgUrl('breadth_logo.png')"/></router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <div id="google_translate_element"></div>
       <v-toolbar-items class="hidden-xs-only">
         <v-btn flat><router-link to="/portfolio">Portfolio</router-link></v-btn>
         <v-btn flat><router-link to="/post">Post</router-link></v-btn>
