@@ -13,11 +13,17 @@
       <v-toolbar-items class="hidden-xs-only">
         <v-btn flat><router-link to="/portfolio">Portfolio</router-link></v-btn>
         <v-btn flat><router-link to="/post">Post</router-link></v-btn>
-        <v-btn flat><router-link to="/login">login</router-link></v-btn>
+
+        <v-btn v-if="!user" flat><router-link to="/login">login</router-link></v-btn>
+        <v-btn v-else flat v-on:click="logout"><router-link to="/login">logout</router-link></v-btn>
+
 <v-btn v-on:click="bookmarksite('ujj', 'http://ujj.com')"><v-icon>bookmark</v-icon></v-btn>
+      {{user}}
       </v-toolbar-items>
     </v-toolbar>
+
   </div>
+
   <v-navigation-drawer temporary style="position:fixed" v-model="sideNav">
     <v-list>
       <v-list-tile
@@ -29,6 +35,23 @@
       </v-list-tile-action>
       <v-list-tile-content>{{ item.title }}</v-list-tile-content>
     </v-list-tile>
+
+
+    <v-list-tile v-if="!user" to="/login">
+      <v-list-tile-action>
+        <v-icon>exit_to_app</v-icon>
+      </v-list-tile-action>
+      <v-list-tile-content>Login</v-list-tile-content>
+    </v-list-tile>
+
+    <v-list-tile v-else v-on:click="logout">
+      <v-list-tile-action>
+        <v-icon>exit_to_app</v-icon>
+      </v-list-tile-action>
+      <v-list-tile-content>Logout</v-list-tile-content>
+    </v-list-tile>
+
+
   </v-list>
 </v-navigation-drawer>
 </v-app>
@@ -36,16 +59,18 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
+
 export default {
   name: 'MainHeader',
   data () {
     return{
       sideNav: false,
+      user: firebase.auth().currentUser,
       menuItems: [
         { icon: 'home', title: 'home', link: '/' },
         { icon: 'portrait', title: 'Portfolio', link: '/portfolio' },
-        { icon: 'photo_filter', title: 'Post', link: '/post' },
-        { icon: 'exit_to_app', title: 'Login', link: '/login' }
+        { icon: 'photo_filter', title: 'Post', link: '/post' }
       ]
     }
   },
@@ -73,8 +98,23 @@ export default {
         elem.setAttribute('rel', 'sidebar');
         elem.click();
       }
+  },
+  logout(){
+    alert(this.user);
+
+    if(this.user){
+      firebase.auth().signOut().then(() => {
+        this.$router.replace('login')
+        alert("로그아웃 되었습니다.");
+      }).catch(function(error) {
+        alert(error);
+      });
+    }else{
+      this.$router.replace('login')
+      alert("로그인 후 이용해주세요.");
+    }
   }
-}
+  }
 }
 </script>
 <style>

@@ -8,10 +8,9 @@
 
       <v-layout>
         <form>
-          <v-text-field label="Regular" placeholder="Placeholder"></v-text-field>
-          <v-text-field label="Regular" placeholder="Placeholder"></v-text-field>
-          <v-btn v-on:click="">SignUp submit</v-btn>
-
+          <v-text-field v-model="email" label="Email" placeholder="Placeholder"></v-text-field>
+          <v-text-field v-model="password" type="password" label="Password" placeholder="Placeholder"></v-text-field>
+          <v-btn v-on:click="signUp()">SignUp submit</v-btn>
         </form>
       </v-layout>
 
@@ -22,20 +21,34 @@
 <script>
 import ImgBanner from '../components/ImgBanner'
 import FirebaseService from '@/services/FirebaseService'
+import firebase from 'firebase/app'
 
 export default {
-	name: 'SignUpPage',
+   name: 'SignUpPage',
   data(){
-    return{}
+    return{
+      email: '',
+      password: ''
+    }
   },
-	components: {
-		ImgBanner,
-	},
+   components: {
+      ImgBanner,
+   },
   mounted(){
 
   },
   methods:{
+    signUp(){
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+      .then((user)=>{
+        alert("Your account has been created!")
+        this.$router.replace('login')
+      })
+      .catch((error)=>{
+        alert(error)
+      })
 
+    }
   }
 }
 </script>
