@@ -4,6 +4,7 @@ import 'firebase/auth'
 
 const POSTS = 'posts'
 const PORTFOLIOS = 'portfolios'
+const BANNER = 'banner'
 
 // Setup Firebase
 const config = {
@@ -78,6 +79,25 @@ export default {
       }).catch(function(error) {
          console.error('[Facebook Login Error]', error)
       })
-   }
+   },
+   getBanner() {
+      const postsCollection = firestore.collection(BANNER)
+      return postsCollection
+            .orderBy('created_at', 'desc')
+            .get()
+            .then((docSnapshots) => {
+               return docSnapshots.docs.map((doc) => {
+                  let data = doc.data()
+                  data.created_at = new Date(data.created_at.toDate())
+                  return data
+               })
+            })
+   },
+   postBanner(img) {
+      return firestore.collection(BANNER).add({
+         img,
+         created_at: firebase.firestore.FieldValue.serverTimestamp()
+      })
+   },
 
 }

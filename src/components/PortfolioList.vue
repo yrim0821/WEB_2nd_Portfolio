@@ -10,9 +10,8 @@
     </v-flex>
 
     <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
-      <v-btn color="info" dark v-on:click="loadMorePortfolios">
-        <v-icon size="25" class="mr-2">fa-plus</v-icon> 더 보기</v-btn>
-        <router-link to="/portfoliowirter"><v-btn color="info" dark v-on:click="loadMorePortfolios">
+      <v-btn color="info" dark v-on:click="loadMorePortfolios"><v-icon size="25" class="mr-2">fa-plus</v-icon> 더 보기</v-btn>
+        <router-link to="/portfoliowriter"><v-btn color="info" dark v-on:click="loadMorePortfolios">
           <v-icon size="25" class="mr-2">create</v-icon> 작성하기</v-btn></router-link>
     </v-flex>
   </v-layout>
@@ -22,30 +21,30 @@ import Portfolio from '@/components/Portfolio'
 import FirebaseService from '@/services/FirebaseService'
 
 export default {
-	name: 'PortfoliosList',
-	props: {
-		limits: {type: Number, default: 4},
+   name: 'PortfoliosList',
+   props: {
+      limits: {type: Number, default: 4},
     loadMore: {type: Boolean, default: false}
-	},
-	data() {
-		return {
-			portfolios: []
-		}
-	},
-	components: {
-		Portfolio
-	},
-	mounted() {
-		this.getPortfolios()
-	},
-	methods: {
-		async getPortfolios() {
-			this.portfolios = await FirebaseService.getPortfolios()
-		},
-		loadMorePortfolios() {
+   },
+   data() {
+      return {
+         portfolios: []
+      }
+   },
+   components: {
+      Portfolio
+   },
+   mounted() {
+      this.getPortfolios()
+   },
+   methods: {
+      async getPortfolios() {
+         this.portfolios = await FirebaseService.getPortfolios()
+      },
+      loadMorePortfolios() {
 
     }
-	},
+   },
 }
 </script>
 <style>

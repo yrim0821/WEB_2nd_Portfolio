@@ -16,54 +16,57 @@
         <v-btn flat><router-link to="/post">Post</router-link></v-btn>
 
 
-          <v-dialog v-if="!$store.state.user" v-model="loginDialog" width="500">
+          <v-dialog v-if="!$store.state.user" v-model="loginDialog" width="380">
             <template v-slot:activator="{ on }">
               <v-btn flat v-on="on"><router-link to="">login</router-link></v-btn>
             </template>
 
             <v-card>
-              <v-card-title class="headline grey lighten-2" primary-title>Login</v-card-title>
-              <v-card-text>
-                <div style="padding:10px;">
-                  <v-text-field v-model="loginEmail" label="Email" placeholder="Placeholder"></v-text-field>
-                  <v-text-field v-model="loginPassword" label="Password" placeholder="Placeholder" type="password"></v-text-field>
+              <v-img :src="getImgUrl('login_form.png')" style="width:100%">
+
+              <v-card-text style="margin-top:150px">
+                <div style="padding-left:50px;">
+                  <v-text-field v-model="loginEmail" label="Email" placeholder="Placeholder" style="width:250px;"></v-text-field>
+                  <v-text-field v-model="loginPassword" label="Password" placeholder="Placeholder" type="password" style="width:250px;"></v-text-field>
+
+
+                  <v-btn round color="#20aa49" dark v-on:click="loginWithMail" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">mail</v-icon> Mail 로그인</v-btn>
+                  <v-btn round color="#df4a31" dark v-on:click="loginWithGoogle" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">fa-google</v-icon> Google 로그인</v-btn>
+                  <v-btn round color="#4267B2" dark v-on:click="loginWithFacebook" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">fa-facebook</v-icon> Google 로그인</v-btn>
+
+                  <v-dialog v-model="signupDialog" width="500">
+                    <template v-slot:activator="{ on }">
+                      <v-btn round color="#888888" dark v-on="on" style="width:230px;height:25px;"><v-icon size="20" class="mr-2">person</v-icon>회원가입</v-btn>
+                    </template>
+
+                    <v-card>
+                      <v-card-title class="headline grey lighten-2" primary-title>Sign up</v-card-title>
+                      <v-card-text>
+                        <form>
+                          <v-text-field v-model="signupEmail" label="Email" placeholder="Placeholder"></v-text-field>
+                          <v-text-field v-model="signupPassword" label="Password" placeholder="Placeholder"></v-text-field>
+                        </form>
+                      </v-card-text>
+                      <v-divider></v-divider>
+
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                          <v-btn color="primary" flat v-on:click="signUp()">SignUp</v-btn>
+                          <v-btn color="primary" flat @click="signupDialog = false">close</v-btn>
+                      </v-card-actions>
+                    </v-card>
+
+                  </v-dialog>
                 </div>
-                <div style="margin-top:20px"></div>
-
-                <v-btn round color="#20aa49" dark v-on:click="loginWithMail" style="width:100%;"><v-icon size="25" class="mr-2">mail</v-icon> Mail 로그인</v-btn>
-                <v-btn round color="#df4a31" dark v-on:click="loginWithGoogle" style="width:100%;"><v-icon size="25" class="mr-2">fa-google</v-icon> Google 로그인</v-btn>
-                <v-btn round color="#4267B2" dark v-on:click="loginWithFacebook" style="width:100%;"><v-icon size="25" class="mr-2">fa-facebook</v-icon> Google 로그인</v-btn>
-
-                <v-dialog v-model="signupDialog" width="500">
-                  <template v-slot:activator="{ on }">
-                    <v-btn round color="#888888" dark v-on="on" style="width:100%;"><v-icon size="25" class="mr-2">person</v-icon>회원가입</v-btn>
-                  </template>
-
-                  <v-card>
-                    <v-card-title class="headline grey lighten-2" primary-title>Sign up</v-card-title>
-                    <v-card-text>
-                      <form>
-                        <v-text-field v-model="signupEmail" label="Email" placeholder="Placeholder"></v-text-field>
-                        <v-text-field v-model="signupPassword" label="Password" placeholder="Placeholder"></v-text-field>
-                      </form>
-                    </v-card-text>
-                    <v-divider></v-divider>
-
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                        <v-btn color="primary" flat v-on:click="signUp()">SignUp</v-btn>
-                        <v-btn color="primary" flat @click="signupDialog = false">close</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
               </v-card-text>
-              <v-divider></v-divider>
 
               <v-card-actions>
                 <v-spacer></v-spacer>
                   <v-btn color="primary" flat @click="loginDialog = false">close</v-btn>
               </v-card-actions>
+            </v-img>
             </v-card>
+
           </v-dialog>
 
         <v-btn v-else flat v-on:click="logout"><router-link to="/login">logout</router-link></v-btn>
@@ -122,7 +125,8 @@ export default {
       loginDialog: false,
       signupDialog: false,
       sideNav: false,
-      user: firebase.auth().currentUser,
+      user: '',
+      accessToken: '',
       menuItems: [
         { icon: 'home', title: 'home', link: '/' },
         { icon: 'portrait', title: 'Portfolio', link: '/portfolio' },
@@ -164,30 +168,33 @@ export default {
     async loginWithMail(){
       firebase.auth().signInWithEmailAndPassword(this.loginEmail, this.loginPassword)
       .then((user)=>{
-
         this.$store.state.accessToken = user.user.refreshToken
-        this.$store.state.user = user.user.email
-        alert(this.$store.state.user + " 님 로그인 되었습니다")
+        this.$store.state.user = user.user
+        localStorage.setItem('accessToken', this.$store.state.accessToken)
+        localStorage.setItem('user', JSON.stringify(user.user))
+        alert(this.$store.state.user.email + "님 로그인 되었습니다")
         this.$router.replace('/')
-
       })
       .catch((error)=>{
         alert(error)
       })
-
     },
     async loginWithGoogle() {
        const result = await FirebaseService.loginWithGoogle()
        this.$store.state.accessToken = result.credential.accessToken
        this.$store.state.user = result.user
-       alert(this.$store.state.user.displayName + " 님 로그인 되었습니다")
+       localStorage.setItem('accessToken', this.$store.state.accessToken)
+       localStorage.setItem('user', JSON.stringify(result.user))
+       alert(this.$store.state.user.email + "님 로그인 되었습니다")
       this.$router.replace('/')
     },
     async loginWithFacebook() {
          const result = await FirebaseService.loginWithFacebook()
          this.$store.state.accessToken = result.credential.accessToken
          this.$store.state.user = result.user
-      alert(this.$store.state.user.displayName + " 님 로그인 되었습니다")
+         localStorage.setItem('accessToken', this.$store.state.accessToken)
+         localStorage.setItem('user', JSON.stringify(result.user))
+      alert(this.$store.state.user.displayName + "님 로그인 되었습니다")
       this.$router.replace('/')
       },
     signUp(){
@@ -205,24 +212,37 @@ export default {
     logout(){
       if(firebase.auth().currentUser == null){
         alert("로그인 후 이용해주세요.");
+        this.$store.state.accessToken = '';
+        this.$store.state.user = '';
+        localStorage.setItem('accessToken', this.$store.state.accessToken)
+        localStorage.setItem('user', this.$store.state.user)
+        this.$router.replace('/')
       }
       else if(firebase.auth().currentUser){
         firebase.auth().signOut().then(() => {
-          if(this.$store.state.user.displayName == null){
-            alert(this.$store.state.user + "님 로그아웃 되었습니다.");
-          }else{
-            alert(this.$store.state.user.displayName + "님 로그아웃 되었습니다.");
-          }
+          alert(this.$store.state.user.email + "님 로그아웃 되었습니다.");
           this.$store.state.accessToken = '';
           this.$store.state.user = '';
+          localStorage.setItem('accessToken', this.$store.state.accessToken)
+          localStorage.setItem('user', this.$store.state.user)
+          this.loginDialog = false;
+          this.signupDialog = false;
+          this.$router.replace('/')
         }).catch(function(error) {
           alert(error);
         });
       }
+
     }
   },
   mounted(){
-    this.user = firebase.auth().currentUser;
+    if(localStorage.getItem("user")==null || localStorage.getItem("user")==''){
+
+    }else{
+      this.$store.state.user = JSON.parse(localStorage.getItem("user") || "{}");
+      this.$store.state.accessToken = localStorage.getItem('accessToken');
+    }
+
   }
 }
 </script>

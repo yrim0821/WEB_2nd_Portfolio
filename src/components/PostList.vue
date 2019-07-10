@@ -9,7 +9,8 @@
     </v-flex>
     <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
       <v-btn color="info" dark v-on:click="loadMorePosts"><v-icon size="25" class="mr-2">fa-plus</v-icon> 더 보기</v-btn>
-      <v-btn v-on:click="postPost('Post Test Title', 'Post Test Body')">Post submit</v-btn>
+      <router-link to="/postwriter"><v-btn color="info" dark v-on:click="loadMorePosts">
+        <v-icon size="25" class="mr-2">create</v-icon> 작성하기</v-btn></router-link>
     </v-flex>
   </v-layout>
 </template>
@@ -18,34 +19,34 @@ import Post from '@/components/Post'
 import FirebaseService from '@/services/FirebaseService'
 
 export default {
-	name: 'PostList',
-	props: {
-		column: {type: Number, default: 1},
-		limits: {type: Number, default: 4},
-		loadMore: {type: Boolean, default: false}
-	},
-	data() {
-		return {
-			posts: []
-		}
-	},
-	components: {
-		Post
-	},
-	mounted() {
-		this.getPosts()
-	},
-	methods: {
-		async getPosts() {
-			this.posts = await FirebaseService.getPosts()
-		},
+   name: 'PostList',
+   props: {
+      column: {type: Number, default: 1},
+      limits: {type: Number, default: 4},
+      loadMore: {type: Boolean, default: false}
+   },
+   data() {
+      return {
+         posts: []
+      }
+   },
+   components: {
+      Post
+   },
+   mounted() {
+      this.getPosts()
+   },
+   methods: {
+      async getPosts() {
+         this.posts = await FirebaseService.getPosts()
+      },
     async postPost(title, body){
       await FirebaseService.postPost(title, body)
     },
-		loadMorePosts() {
+     async   loadMorePosts() {
 
     }
-	}
+   }
 }
 </script>
 <style>

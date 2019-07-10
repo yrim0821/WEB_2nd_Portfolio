@@ -1,7 +1,9 @@
 <template>
+
   <div>
-    <ImgBanner imgSrc="https://source.unsplash.com/random">
-      <div style="line-height:1.2em;" slot="text">Just Do IT.</div>
+    <div style="margin-top:50px"></div>
+    <ImgBanner>
+      <div id="BannerTitle" style="line-height:1.2em;" slot="text">Even Dead I'm The Hero.</div>
     </ImgBanner>
     <v-container>
       <!-- About Me -->
@@ -61,7 +63,7 @@
   import RepositoryList from '../components/RepositoryList'
   import clock from '../components/clock'
   import firebase from 'firebase/app'
-  
+
   export default {
     name: 'HomePage',
     components: {
@@ -101,5 +103,11 @@
 
   .aboutMe.mr-4{
     overflow-y: scroll;
+  }
+  #BannerTitle{
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(240,20,30,5) 0%, rgba(150,120,220,1) 46%, rgba(250,240,0,5) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
   }
   </style>
