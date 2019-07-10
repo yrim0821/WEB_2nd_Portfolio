@@ -1,15 +1,12 @@
+<!--
 <template>
   <v-layout align-center justify-center row fill-height>
     <v-flex xs5 text-xs-center>
 
       <div style="margin-top:100px"></div>
 
-
-
       <v-layout align-center justify-center row fill-height elevation-5 style="min-height:300px;" white pa-4>
-
         <v-flex xs12 text-xs-center>
-
           <div style="padding:10px;">
             <v-text-field v-model="loginEmail" label="Email" placeholder="Placeholder"></v-text-field>
             <v-text-field v-model="loginPassword" label="Password" placeholder="Placeholder" type="password"></v-text-field>
@@ -43,8 +40,13 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
+
+
         </v-flex>
       </v-layout>
+
+
+
 
       <div style="margin-top:20px"></div>
 
@@ -116,3 +118,4 @@ export default {
    }
 }
 </script>
+-->

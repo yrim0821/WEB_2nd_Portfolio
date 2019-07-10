@@ -1,3 +1,4 @@
+<!--
 <template>
   <div>
     <ImgBanner imgSrc="https://source.unsplash.com/5brvJbR1Pn8/1600x900">
@@ -52,3 +53,4 @@ export default {
   }
 }
 </script>
+-->

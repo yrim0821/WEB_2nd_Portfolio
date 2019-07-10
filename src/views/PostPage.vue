@@ -11,12 +11,7 @@
           <PostList :limits="6" :load-more="true"></PostList>
         </v-flex>
 
-        <form>
-          <v-btn v-on:click="postPost('Post Test Title', 'Post Test Body')">Post submit</v-btn>
-
-        </form>
       </v-layout>
-
     </v-container>
   </div>
 </template>
@@ -39,9 +34,7 @@ export default {
 
   },
   methods:{
-    async postPost(title, body){
-      await FirebaseService.postPost(title, body)
-    }
+  
   }
 }
 </script>
