@@ -40,7 +40,7 @@
       },
       methods:{
         async postPost(title, body){
-          if(title == ''){
+          if(title == ''){  
             alert("제목을 입력해주세요")
           }else if(body == ''){
             alert("내용을 입력해주세요")
