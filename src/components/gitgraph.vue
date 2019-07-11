@@ -1,6 +1,6 @@
 
 <template>
-  <div style="margin-top: 200px;">
+  <div class="notranslate" style="margin-top: 200px;">
     <div class="calendarContainer">
       <div class="calendarBox" id="calendar_basic" style="width: 1000px; height: 350px;"></div>
     </div>
@@ -38,7 +38,7 @@ function drawChart(datas, testing) {
   let year = date.getFullYear();
   let month = date.getMonth();
   let day = date.getDay();
-  let personal_title = "그래프 나와줘 제바류ㅠㅠㅠ"
+  let personal_title = "Gitlab Graph"
 
   if(datas != undefined) {
     for(let index = 0; datas[index] != null; index++) {

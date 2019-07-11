@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="notranslate">
     <v-parallax :src="this.$store.state.imgSrc" aspect-ratio="16/4" height="720">
       <v-layout align-center justify-center row fill-height>
         <v-flex text-xs-center>
@@ -11,13 +11,13 @@
         <div style="position:absolute; right:0px; bottom:0px">
           <form id="imgur">
             <div class="filebox">
-              <label for="upload"><v-icon class="notranslate">cloud_upload</v-icon></label>
+              <label for="upload"><v-icon>cloud_upload</v-icon></label>
               <input type="file" id="upload" @change="onFileSelected" class="imgur" accept="image/*" data-max-size="5000"/>
-              <v-btn icon @click="RandomFile"><v-icon class="notranslate">autorenew</v-icon></v-btn>
+              <v-btn icon @click="RandomFile"><v-icon>autorenew</v-icon></v-btn>
             </div>
-
           </form>
         </div>
+
       </v-layout>
     </v-parallax>
   </div>

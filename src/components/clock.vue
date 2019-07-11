@@ -1,6 +1,6 @@
 <template>
   <!--clock-->
-  <div id="clock">
+  <div id="clock" class="notranslate">
     <div id="content" v-bind:style="contentStyle" @click="clicked">
       <div class="wrapper">
         <p v-bind:style="instructionsStyle">{{instruction}}</p>
@@ -31,7 +31,7 @@ export default{
       three: false,
       four: false,
       faded: '',
-      instruction: "Click anywhere to change the clock's format",
+      instruction: "Click me!",
       instructionsStyle: {
         opacity: 1,
         transition: '.2s'

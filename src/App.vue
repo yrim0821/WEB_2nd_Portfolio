@@ -4,8 +4,8 @@
     <v-content>
       <router-view/>
     </v-content>
-    <back-to-top bottom="50px" right="50px">
-      <button type="button" class="btn btn-info btn-to-top"><i class="fa fa-chevron-up"></i></button>
+    <back-to-top bottom="20px" right="10px">
+      <v-btn flat icon type="button" class="btn btn-info btn-to-top notranslate"><v-icon>keyboard_arrow_up</v-icon></v-btn>
     </back-to-top>
     <MainFooter/>
   </v-app>
@@ -50,14 +50,6 @@ export default {
 }
 </script>
 <style>
-.btn-to-top {
-  width: 60px;
-  height: 60px;
-  padding: 10px 16px;
-  border-radius: 50%;
-  font-size: 22px;
-  line-height: 22px;
-}
 @font-face {
   font-family: 'Swagger';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/Swagger.woff') format('woff');
@@ -66,5 +58,11 @@ export default {
   }
 *{
   font-family: Swagger;
+}
+#bannerTitle{
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(240,20,30,5) 0%, rgba(150,120,220,1) 46%, rgba(250,240,0,5) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 </style>

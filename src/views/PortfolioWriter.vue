@@ -1,7 +1,8 @@
 <template>
   <div class="notranslate">
+    <div style="margin-top:48px"></div>
     <ImgBanner>
-      <div style="line-height:1.2em;font-size:1.2em;" slot="text">Portfolio</div>
+      <div id="bannerTitle" style="line-height:1.2em;font-size:1.2em;" slot="text">PortfolioWriter</div>
     </ImgBanner>
 
     <v-container>

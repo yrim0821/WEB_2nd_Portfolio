@@ -1,55 +1,57 @@
 <template>
-  <v-layout mt-5 wrap>
-    <v-flex v-for="i in portfolios.length > limits ? limits : portfolios.length"  xs12 sm6 md4 lg3>
-      <Portfolio class="ma-3"
-              :date="portfolios[i - 1].created_at.toString()"
-              :title="portfolios[i - 1].title"
-              :body="portfolios[i - 1].body"
-              :imgSrc="portfolios[i - 1].img"
-      ></Portfolio>
-    </v-flex>
+  <div class="notranslate">
+    <v-layout mt-5 wrap>
+      <v-flex v-for="i in portfolios.length > limits ? limits : portfolios.length"  xs12 sm6 md4 lg3>
+        <Portfolio class="ma-3"
+        :date="portfolios[i - 1].created_at.toString()"
+        :title="portfolios[i - 1].title"
+        :body="portfolios[i - 1].body"
+        :imgSrc="portfolios[i - 1].img"
+        ></Portfolio>
+      </v-flex>
 
-    <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
-      <v-btn color="info" dark v-on:click="loadMorePortfolios"><v-icon size="25" class="mr-2 notranslate">fa-plus</v-icon> 더 보기</v-btn>
+      <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
+        <v-btn color="info" dark v-on:click="loadMorePortfolios"><v-icon size="25" class="mr-2">fa-plus</v-icon>View more</v-btn>
         <router-link to="/portfoliowriter"><v-btn color="info" dark v-on:click="loadMorePortfolios">
-          <v-icon size="25" class="mr-2 notranslate">create</v-icon> 작성하기</v-btn></router-link>
-    </v-flex>
-  </v-layout>
-</template>
-<script>
-import Portfolio from '@/components/Portfolio'
-import FirebaseService from '@/services/FirebaseService'
+          <v-icon size="25" class="mr-2">create</v-icon>Write</v-btn></router-link>
+        </v-flex>
+      </v-layout>
+    </div>
+  </template>
+  <script>
+  import Portfolio from '@/components/Portfolio'
+  import FirebaseService from '@/services/FirebaseService'
 
-export default {
-   name: 'PortfoliosList',
-   props: {
+  export default {
+    name: 'PortfoliosList',
+    props: {
       limits: {type: Number, default: 4},
-    loadMore: {type: Boolean, default: false}
-   },
-   data() {
+      loadMore: {type: Boolean, default: false}
+    },
+    data() {
       return {
-         portfolios: []
+        portfolios: []
       }
-   },
-   components: {
+    },
+    components: {
       Portfolio
-   },
-   mounted() {
+    },
+    mounted() {
       this.getPortfolios()
-   },
-   methods: {
+    },
+    methods: {
       async getPortfolios() {
-         this.portfolios = await FirebaseService.getPortfolios()
+        this.portfolios = await FirebaseService.getPortfolios()
       },
       loadMorePortfolios() {
 
-    }
-   },
-}
-</script>
-<style>
+      }
+    },
+  }
+  </script>
+  <style>
   .mw-700 {
     max-width: 700px;
     margin: auto;
   }
-</style>
+  </style>

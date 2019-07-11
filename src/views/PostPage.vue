@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div style="margin-top:50px"></div>
+    <div style="margin-top:48px"></div>
     <ImgBanner>
-      <div style="line-height:1.2em;font-size:1.2em;" slot="text" class="notranslate">Post</div>
+      <div id="bannerTitle" style="line-height:1.2em;font-size:1.2em;" slot="text">Post</div>
     </ImgBanner>
     <v-container>
 

@@ -1,118 +1,114 @@
 <template>
-  <v-app style="position:absolute">
-    <div class="toolbar">
-      <v-toolbar id="header">
-        <v-toolbar-side-icon
-        @click.stop="sideNav = !sideNav"
-        class="hidden-sm-and-up"><v-icon class='notranslate'>menu</v-icon>
-      </v-toolbar-side-icon>
-      <v-toolbar-title>
-        <router-link to="/"><v-img id="breadth_logo" :src="getImgUrl('breadth_logo.png')"/></router-link>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
+  <div class="notranslate">
+    <v-app style="position:absolute">
+      <div class="toolbar">
+        <v-toolbar id="header">
+          <v-toolbar-side-icon @click.stop="sideNav = !sideNav" class="hidden-sm-and-up">
+            <v-icon>menu</v-icon>
+          </v-toolbar-side-icon>
+          <v-toolbar-title>
+            <router-link to="/">
+              <v-img id="breadth_logo" :src="getImgUrl('breadth_logo.png')"/>
+            </router-link>
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
 
-      <!-- 번역 버튼 -->
-      <v-btn flat icon @click='refresh()' href="#googtrans(en|ko)"><img src="img/KR.png" alt="KOREA" width="25px"></v-btn>
-      <v-btn flat icon @click='refresh()' href="#googtrans(en|en)"><img src="img/US.png" alt="USA" width="25px"></v-btn>
+          <v-toolbar-items class="hidden-xs-only">
+            <v-btn flat>
+              <router-link to="/portfolio">Portfolio</router-link>
+            </v-btn>
+            <v-btn flat>
+              <router-link to="/post">Post</router-link>
+            </v-btn>
+
+            <v-dialog v-if="!$store.state.user" v-model="loginDialog" width="380">
+              <template v-slot:activator="{ on }">
+                <v-btn flat v-on="on">
+                  <router-link to="">login</router-link>
+                </v-btn>
+              </template>
+
+              <v-card>
+                <v-img :src="getImgUrl('login_form.png')" style="width:100%">
+
+                  <v-card-text style="margin-top:150px">
+                    <div style="padding-left:50px;">
+                      <v-text-field v-model="loginEmail" label="Email" style="width:250px;"></v-text-field>
+                      <v-text-field v-model="loginPassword" label="Password" type="password" style="width:250px;"></v-text-field>
+
+                      <v-btn round color="#20aa49" dark v-on:click="loginWithMail" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">mail</v-icon> Mail 로그인</v-btn>
+                      <v-btn round color="#df4a31" dark v-on:click="loginWithGoogle" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">fa-google</v-icon> Google 로그인</v-btn>
+                      <v-btn round color="#4267B2" dark v-on:click="loginWithFacebook" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">fa-facebook</v-icon> Google 로그인</v-btn>
+
+                      <v-dialog v-model="signupDialog" width="500">
+                        <template v-slot:activator="{ on }">
+                          <v-btn round color="#888888" dark v-on="on" style="width:230px;height:25px;"><v-icon size="20" class="mr-2">person</v-icon>회원가입</v-btn>
+                        </template>
+
+                        <v-card>
+                          <v-card-title class="headline grey lighten-2" primary-title>Sign up</v-card-title>
+                          <v-card-text>
+                            <form>
+                              <v-text-field v-model="signupEmail" label="Email" placeholder="Placeholder"></v-text-field>
+                              <v-text-field v-model="signupPassword" label="Password" placeholder="Placeholder"></v-text-field>
+                            </form>
+                          </v-card-text>
+                          <v-divider></v-divider>
+
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="primary" flat v-on:click="signUp()">SignUp</v-btn>
+                            <v-btn color="primary" flat @click="signupDialog = false">close</v-btn>
+                          </v-card-actions>
+                        </v-card>
+
+                      </v-dialog>
+                    </div>
+                  </v-card-text>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="primary" flat @click="loginDialog = false">close</v-btn>
+                  </v-card-actions>
+                </v-img>
+              </v-card>
+
+            </v-dialog>
+
+            <v-btn v-else flat v-on:click="logout"><router-link to="/login">logout</router-link></v-btn>
+            <v-btn flat icon v-on:click="bookmarksite('ujj', 'http://ujj.com')"><v-icon width="25px">bookmark</v-icon></v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
+      </div>
+
+      <v-navigation-drawer temporary style="position:fixed" v-model="sideNav">
+        <v-list>
+          <v-list-tile v-for="item in menuItems" :key="item.title" :to="item.link">
+            <v-list-tile-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>{{ item.title }}</v-list-tile-content>
+          </v-list-tile>
 
 
-      <v-toolbar-items class="hidden-xs-only">
-        <v-btn flat class='notranslate'><router-link to="/portfolio">Portfolio</router-link></v-btn>
-        <v-btn flat class='notranslate'><router-link to="/post">Post</router-link></v-btn>
+          <v-list-tile v-if="!$store.state.user" >
+            <v-list-tile-action>
+              <v-icon>exit_to_app</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>Login</v-list-tile-content>
+          </v-list-tile>
 
-
-        <v-dialog v-if="!$store.state.user" v-model="loginDialog" width="380">
-          <template v-slot:activator="{ on }">
-            <v-btn flat v-on="on" class='notranslate'><router-link to="">login</router-link></v-btn>
-          </template>
-
-          <v-card>
-            <v-img :src="getImgUrl('login_form.png')" style="width:100%">
-
-              <v-card-text style="margin-top:150px">
-                <div style="padding-left:50px;">
-                  <v-text-field class="notranslate" v-model="loginEmail" label="Email" style="width:250px;"></v-text-field>
-                  <v-text-field class="notranslate" v-model="loginPassword" label="Password" type="password" style="width:250px;"></v-text-field>
-
-
-                  <v-btn class='notranslate' round color="#20aa49" dark v-on:click="loginWithMail" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">mail</v-icon> Mail 로그인</v-btn>
-                  <v-btn class='notranslate' round color="#df4a31" dark v-on:click="loginWithGoogle" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">fa-google</v-icon> Google 로그인</v-btn>
-                  <v-btn class='notranslate' round color="#4267B2" dark v-on:click="loginWithFacebook" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">fa-facebook</v-icon> Google 로그인</v-btn>
-
-                  <v-dialog v-model="signupDialog" width="500">
-                    <template v-slot:activator="{ on }">
-                      <v-btn class='notranslate' round color="#888888" dark v-on="on" style="width:230px;height:25px;"><v-icon size="20" class="mr-2">person</v-icon>회원가입</v-btn>
-                    </template>
-
-                    <v-card>
-                      <v-card-title class="headline grey lighten-2" primary-title>Sign up</v-card-title>
-                      <v-card-text>
-                        <form>
-                          <v-text-field v-model="signupEmail" label="Email" placeholder="Placeholder"></v-text-field>
-                          <v-text-field v-model="signupPassword" label="Password" placeholder="Placeholder"></v-text-field>
-                        </form>
-                      </v-card-text>
-                      <v-divider></v-divider>
-
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="primary" flat v-on:click="signUp()">SignUp</v-btn>
-                        <v-btn color="primary" flat @click="signupDialog = false">close</v-btn>
-                      </v-card-actions>
-                    </v-card>
-
-                  </v-dialog>
-                </div>
-              </v-card-text>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="loginDialog = false">close</v-btn>
-              </v-card-actions>
-            </v-img>
-          </v-card>
-
-        </v-dialog>
-
-        <v-btn v-else flat v-on:click="logout"><router-link to="/login">logout</router-link></v-btn>
-        <v-btn v-on:click="bookmarksite('ujj', 'http://ujj.com')"><v-icon class='notranslate'>bookmark</v-icon></v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
+          <v-list-tile v-else v-on:click="logout">
+            <v-list-tile-action>
+              <v-icon>exit_to_app</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>Logout</v-list-tile-content>
+          </v-list-tile>
+            
+        </v-list>
+      </v-navigation-drawer>
+    </v-app>
   </div>
-
-
-  <v-navigation-drawer temporary style="position:fixed" v-model="sideNav">
-    <v-list>
-      <v-list-tile
-      v-for="item in menuItems"
-      :key="item.title"
-      :to="item.link">
-      <v-list-tile-action>
-        <v-icon class='notranslate'>{{ item.icon }}</v-icon>
-      </v-list-tile-action>
-      <v-list-tile-content class='notranslate'>{{ item.title }}</v-list-tile-content>
-    </v-list-tile>
-
-
-    <v-list-tile v-if="!$store.state.user" >
-      <v-list-tile-action>
-        <v-icon class='notranslate'>exit_to_app</v-icon>
-      </v-list-tile-action>
-      <v-list-tile-content class='notranslate'>Login</v-list-tile-content>
-    </v-list-tile>
-
-    <v-list-tile v-else v-on:click="logout">
-      <v-list-tile-action>
-        <v-icon class='notranslate'>exit_to_app</v-icon>
-      </v-list-tile-action>
-      <v-list-tile-content class='notranslate'>Logout</v-list-tile-content>
-    </v-list-tile>
-
-
-  </v-list>
-</v-navigation-drawer>
-</v-app>
-
 </template>
 
 <script>
@@ -140,11 +136,6 @@ export default {
     }
   },
   methods: {
-    refresh(){
-      setTimeout((function() {
-        window.location.reload();
-      }), 250);
-    },
     getImgUrl(img) {
       return require('../assets/team6/logo/' + img)
     },

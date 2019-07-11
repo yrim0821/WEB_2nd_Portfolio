@@ -1,22 +1,21 @@
 <template>
-  <v-footer id="footcolor" height="auto" color="indigo" dark>
-          <v-layout justify-center row wrap>
-            <!--weather-->
-            <v-layout column style="z-index: 2;  opacity: 0.8;">
-              <v-flex xs12>
-                <a id="footcolor" class="weatherwidget-io" href="https://forecast7.com/en/36d12128d34/gumi-si/" data-label_1="GUMI" data-label_2="WEATHER" data-theme="weather_one" >GUMI WEATHER</a>
-              </v-flex>
+  <div class="notranslate">
+    <v-footer dark id="footcolor" height="auto" color="indigo">
+      <v-layout justify-center row wrap>
+        <!--weather-->
+        <v-layout column style="z-index: 2;  opacity: 0.8;">
+          <v-flex xs12>
+            <a id="footcolor" class="weatherwidget-io" href="https://forecast7.com/en/36d12128d34/gumi-si/" data-label_1="GUMI" data-label_2="WEATHER" data-theme="weather_one" >GUMI WEATHER</a>
+          </v-flex>
 
-              <v-flex xs12 text-xs-right class='notranslate'>
-                @provided by 맑은유림조 @2019.07.10 @git:lab.ssafy.com
-              </v-flex>
+          <v-flex xs12 text-xs-right>
+            @provided by 맑은유림조 @2019.07.10 @git:lab.ssafy.com
+          </v-flex>
 
-            </v-layout>
-            <!-- <v-flex id="footcolor" dark py-3 text-xs-center white--text xs12>
-              &copy;2019 — <strong>Vuetify</strong>
-            </v-flex> -->
-          </v-layout>
+        </v-layout>
+    </v-layout>
   </v-footer>
+</div>
 </template>
 
 <script>
