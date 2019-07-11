@@ -3,7 +3,7 @@
   <div>
     <div style="margin-top:50px"></div>
     <ImgBanner>
-      <div id="BannerTitle" style="line-height:1.2em;" slot="text">Even Dead I'm The Hero.</div>
+      <div id="BannerTitle" style="line-height:1.2em;" slot="text" class="notranslate">Even Dead I'm The Hero.</div>
     </ImgBanner>
     <v-container>
       <!-- About Me -->
@@ -22,7 +22,7 @@
 
         <!--clock-->
         <v-layout my-5>
-          <v-flex xs12>
+          <v-flex xs12 class="notranslate">
             <clock/>
           </v-flex>
         </v-layout>

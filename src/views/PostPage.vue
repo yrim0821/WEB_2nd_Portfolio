@@ -2,7 +2,7 @@
   <div>
     <div style="margin-top:50px"></div>
     <ImgBanner>
-      <div style="line-height:1.2em;font-size:1.2em;" slot="text">Post</div>
+      <div style="line-height:1.2em;font-size:1.2em;" slot="text" class="notranslate">Post</div>
     </ImgBanner>
     <v-container>
 

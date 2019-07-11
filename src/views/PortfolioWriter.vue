@@ -1,7 +1,7 @@
 <template>
     <div>
         <ImgBanner>
-        <div style="line-height:1.2em;font-size:1.2em;" slot="text">Portfolio</div>
+        <div style="line-height:1.2em;font-size:1.2em;" slot="text" class="notranslate">Portfolio</div>
         </ImgBanner>
 
         <v-container>

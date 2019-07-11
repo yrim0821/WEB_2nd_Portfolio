@@ -10,7 +10,11 @@
         <router-link to="/"><v-img id="breadth_logo" :src="getImgUrl('breadth_logo.png')"/></router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <div id="google_translate_element"></div>
+
+      <!-- 번역 버튼 -->
+       <v-btn flat @click='refresh()' href="#googtrans(en|en)" class="lang-en lang-select" data-lang="en"><img src="img/US.png" alt="USA" height="30px" width="45px"></v-btn>
+       <v-btn flat @click='refresh()' href="#googtrans(en|ko)" class="lang-es lang-select" data-lang="ko"><img src="img/KR.png" alt="KOREA" height="30px" width="45px"></v-btn>
+
       <v-toolbar-items class="hidden-xs-only">
         <v-btn flat><router-link to="/portfolio">Portfolio</router-link></v-btn>
         <v-btn flat><router-link to="/post">Post</router-link></v-btn>
@@ -70,7 +74,7 @@
           </v-dialog>
 
         <v-btn v-else flat v-on:click="logout"><router-link to="/login">logout</router-link></v-btn>
-        <v-btn v-on:click="bookmarksite('ujj', 'http://ujj.com')"><v-icon>bookmark</v-icon></v-btn>
+        <v-btn v-on:click="bookmarksite('ujj', 'http://ujj.com')"><v-icon class='notranslate'>bookmark</v-icon></v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </div>
@@ -135,6 +139,12 @@ export default {
     }
   },
   methods: {
+    // 구글번역
+    refresh(){
+      setTimeout((function() {
+        window.location.reload();
+      }), 250);
+    },
     getImgUrl(img) {
       return require('../assets/team6/logo/' + img)
     },
