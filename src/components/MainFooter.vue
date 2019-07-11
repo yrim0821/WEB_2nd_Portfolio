@@ -2,7 +2,7 @@
   <v-footer id="footcolor" height="auto" color="indigo" dark>
           <v-layout justify-center row wrap>
             <!--weather-->
-            <v-layout style="z-index: 2;  opacity: 0.8;">
+            <v-layout column style="z-index: 2;  opacity: 0.8;">
               <v-flex xs12>
                 <a id="footcolor" class="weatherwidget-io" href="https://forecast7.com/en/36d12128d34/gumi-si/" data-label_1="GUMI" data-label_2="WEATHER" data-theme="weather_one" >GUMI WEATHER</a>
               </v-flex>
