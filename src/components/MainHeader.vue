@@ -4,7 +4,7 @@
       <v-toolbar id="header">
         <v-toolbar-side-icon
         @click.stop="sideNav = !sideNav"
-        class="hidden-sm-and-up"><v-icon>menu</v-icon>
+        class="hidden-sm-and-up"><v-icon class='notranslate'>menu</v-icon>
       </v-toolbar-side-icon>
       <v-toolbar-title>
         <router-link to="/"><v-img id="breadth_logo" :src="getImgUrl('breadth_logo.png')"/></router-link>
@@ -12,35 +12,36 @@
       <v-spacer></v-spacer>
 
       <!-- 번역 버튼 -->
-       <v-btn flat @click='refresh()' href="#googtrans(en|en)" class="lang-en lang-select" data-lang="en"><img src="img/US.png" alt="USA" height="30px" width="45px"></v-btn>
-       <v-btn flat @click='refresh()' href="#googtrans(en|ko)" class="lang-es lang-select" data-lang="ko"><img src="img/KR.png" alt="KOREA" height="30px" width="45px"></v-btn>
+      <v-btn flat icon @click='refresh()' href="#googtrans(en|ko)"><img src="img/KR.png" alt="KOREA" width="25px"></v-btn>
+      <v-btn flat icon @click='refresh()' href="#googtrans(en|en)"><img src="img/US.png" alt="USA" width="25px"></v-btn>
+
 
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn flat><router-link to="/portfolio">Portfolio</router-link></v-btn>
-        <v-btn flat><router-link to="/post">Post</router-link></v-btn>
+        <v-btn flat class='notranslate'><router-link to="/portfolio">Portfolio</router-link></v-btn>
+        <v-btn flat class='notranslate'><router-link to="/post">Post</router-link></v-btn>
 
 
-          <v-dialog v-if="!$store.state.user" v-model="loginDialog" width="380">
-            <template v-slot:activator="{ on }">
-              <v-btn flat v-on="on"><router-link to="">login</router-link></v-btn>
-            </template>
+        <v-dialog v-if="!$store.state.user" v-model="loginDialog" width="380">
+          <template v-slot:activator="{ on }">
+            <v-btn flat v-on="on" class='notranslate'><router-link to="">login</router-link></v-btn>
+          </template>
 
-            <v-card>
-              <v-img :src="getImgUrl('login_form.png')" style="width:100%">
+          <v-card>
+            <v-img :src="getImgUrl('login_form.png')" style="width:100%">
 
               <v-card-text style="margin-top:150px">
                 <div style="padding-left:50px;">
-                  <v-text-field v-model="loginEmail" label="Email" placeholder="Placeholder" style="width:250px;"></v-text-field>
-                  <v-text-field v-model="loginPassword" label="Password" placeholder="Placeholder" type="password" style="width:250px;"></v-text-field>
+                  <v-text-field class="notranslate" v-model="loginEmail" label="Email" style="width:250px;"></v-text-field>
+                  <v-text-field class="notranslate" v-model="loginPassword" label="Password" type="password" style="width:250px;"></v-text-field>
 
 
-                  <v-btn round color="#20aa49" dark v-on:click="loginWithMail" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">mail</v-icon> Mail 로그인</v-btn>
-                  <v-btn round color="#df4a31" dark v-on:click="loginWithGoogle" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">fa-google</v-icon> Google 로그인</v-btn>
-                  <v-btn round color="#4267B2" dark v-on:click="loginWithFacebook" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">fa-facebook</v-icon> Google 로그인</v-btn>
+                  <v-btn class='notranslate' round color="#20aa49" dark v-on:click="loginWithMail" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">mail</v-icon> Mail 로그인</v-btn>
+                  <v-btn class='notranslate' round color="#df4a31" dark v-on:click="loginWithGoogle" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">fa-google</v-icon> Google 로그인</v-btn>
+                  <v-btn class='notranslate' round color="#4267B2" dark v-on:click="loginWithFacebook" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">fa-facebook</v-icon> Google 로그인</v-btn>
 
                   <v-dialog v-model="signupDialog" width="500">
                     <template v-slot:activator="{ on }">
-                      <v-btn round color="#888888" dark v-on="on" style="width:230px;height:25px;"><v-icon size="20" class="mr-2">person</v-icon>회원가입</v-btn>
+                      <v-btn class='notranslate' round color="#888888" dark v-on="on" style="width:230px;height:25px;"><v-icon size="20" class="mr-2">person</v-icon>회원가입</v-btn>
                     </template>
 
                     <v-card>
@@ -55,8 +56,8 @@
 
                       <v-card-actions>
                         <v-spacer></v-spacer>
-                          <v-btn color="primary" flat v-on:click="signUp()">SignUp</v-btn>
-                          <v-btn color="primary" flat @click="signupDialog = false">close</v-btn>
+                        <v-btn color="primary" flat v-on:click="signUp()">SignUp</v-btn>
+                        <v-btn color="primary" flat @click="signupDialog = false">close</v-btn>
                       </v-card-actions>
                     </v-card>
 
@@ -66,12 +67,12 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                  <v-btn color="primary" flat @click="loginDialog = false">close</v-btn>
+                <v-btn color="primary" flat @click="loginDialog = false">close</v-btn>
               </v-card-actions>
             </v-img>
-            </v-card>
+          </v-card>
 
-          </v-dialog>
+        </v-dialog>
 
         <v-btn v-else flat v-on:click="logout"><router-link to="/login">logout</router-link></v-btn>
         <v-btn v-on:click="bookmarksite('ujj', 'http://ujj.com')"><v-icon class='notranslate'>bookmark</v-icon></v-btn>
@@ -87,24 +88,24 @@
       :key="item.title"
       :to="item.link">
       <v-list-tile-action>
-        <v-icon>{{ item.icon }}</v-icon>
+        <v-icon class='notranslate'>{{ item.icon }}</v-icon>
       </v-list-tile-action>
-      <v-list-tile-content>{{ item.title }}</v-list-tile-content>
+      <v-list-tile-content class='notranslate'>{{ item.title }}</v-list-tile-content>
     </v-list-tile>
 
 
-    <v-list-tile v-if="!$store.state.user" to="/login">
+    <v-list-tile v-if="!$store.state.user" >
       <v-list-tile-action>
-        <v-icon>exit_to_app</v-icon>
+        <v-icon class='notranslate'>exit_to_app</v-icon>
       </v-list-tile-action>
-      <v-list-tile-content>Login</v-list-tile-content>
+      <v-list-tile-content class='notranslate'>Login</v-list-tile-content>
     </v-list-tile>
 
     <v-list-tile v-else v-on:click="logout">
       <v-list-tile-action>
-        <v-icon>exit_to_app</v-icon>
+        <v-icon class='notranslate'>exit_to_app</v-icon>
       </v-list-tile-action>
-      <v-list-tile-content>Logout</v-list-tile-content>
+      <v-list-tile-content class='notranslate'>Logout</v-list-tile-content>
     </v-list-tile>
 
 
@@ -139,7 +140,6 @@ export default {
     }
   },
   methods: {
-    // 구글번역
     refresh(){
       setTimeout((function() {
         window.location.reload();
@@ -152,7 +152,7 @@ export default {
       var agent = navigator.userAgent.toLowerCase();
       var name = navigator.appName;
 
-    // MS 계열 브라우저를 구분  IE 11+, IE 11,Edge
+      // MS 계열 브라우저를 구분  IE 11+, IE 11,Edge
       if(name === 'Microsoft Internet Explorer' || agent.indexOf('trident') > -1 || agent.indexOf('edge/') > -1) {
         window.external.AddFavorite(url, title);
       }
@@ -190,23 +190,23 @@ export default {
       })
     },
     async loginWithGoogle() {
-       const result = await FirebaseService.loginWithGoogle()
-       this.$store.state.accessToken = result.credential.accessToken
-       this.$store.state.user = result.user
-       localStorage.setItem('accessToken', this.$store.state.accessToken)
-       localStorage.setItem('user', JSON.stringify(result.user))
-       alert(this.$store.state.user.email + "님 로그인 되었습니다")
+      const result = await FirebaseService.loginWithGoogle()
+      this.$store.state.accessToken = result.credential.accessToken
+      this.$store.state.user = result.user
+      localStorage.setItem('accessToken', this.$store.state.accessToken)
+      localStorage.setItem('user', JSON.stringify(result.user))
+      alert(this.$store.state.user.email + "님 로그인 되었습니다")
       this.$router.replace('/')
     },
     async loginWithFacebook() {
-         const result = await FirebaseService.loginWithFacebook()
-         this.$store.state.accessToken = result.credential.accessToken
-         this.$store.state.user = result.user
-         localStorage.setItem('accessToken', this.$store.state.accessToken)
-         localStorage.setItem('user', JSON.stringify(result.user))
+      const result = await FirebaseService.loginWithFacebook()
+      this.$store.state.accessToken = result.credential.accessToken
+      this.$store.state.user = result.user
+      localStorage.setItem('accessToken', this.$store.state.accessToken)
+      localStorage.setItem('user', JSON.stringify(result.user))
       alert(this.$store.state.user.displayName + "님 로그인 되었습니다")
       this.$router.replace('/')
-      },
+    },
     signUp(){
       firebase.auth().createUserWithEmailAndPassword(this.signupEmail, this.signupPassword)
       .then((user)=>{
@@ -256,6 +256,8 @@ export default {
   }
 }
 </script>
+
+
 <style>
 #breadth_logo{
   width: 140px;

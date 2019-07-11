@@ -94,10 +94,13 @@ export default {
             })
    },
    postBanner(img) {
-      return firestore.collection(BANNER).add({
-         img,
-         created_at: firebase.firestore.FieldValue.serverTimestamp()
-      })
+     return firestore.collection(BANNER).doc("imgid").update({
+        img,
+        created_at: firebase.firestore.FieldValue.serverTimestamp()
+     })
+     .then(function(){
+       console.log("update banner");
+     })
    },
 
 }

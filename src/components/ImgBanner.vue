@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-img :src="imgSrc"
+    <v-img :src="this.$store.state.imgSrc"
            aspect-ratio="1.7">
       <v-layout align-center justify-center row fill-height>
         <v-flex text-xs-center>
@@ -8,11 +8,19 @@
             <slot name="text"/>
           </span>
         </v-flex>
+
+        <div style="position:absolute; right:0px; bottom:0px">
+          <form id="imgur">
+            <div class="filebox">
+              <label for="upload"><v-icon class="notranslate">cloud_upload</v-icon></label>
+              <input type="file" id="upload" @change="onFileSelected" class="imgur" accept="image/*" data-max-size="5000"/>
+              <v-btn icon @click="RandomFile"><v-icon class="notranslate">autorenew</v-icon></v-btn>
+            </div>
+
+          </form>
+        </div>
       </v-layout>
     </v-img>
-    <form id="imgur">
-      <input type="file" @change="onFileSelected" class="imgur" accept="image/*" data-max-size="5000"/>
-    </form>
   </div>
 </template>
 
@@ -28,7 +36,9 @@ export default {
    data () {
      return{
        selectedFile: null,
-       imgSrc:''
+       imgSrc:'',
+       checkRandom: true,
+       banner : []
      }
    },
    props: {
@@ -37,6 +47,7 @@ export default {
    },
    methods: {
      onFileSelected(event){
+       this.checkRandom=false;
        this.selectedFile = event.target.files
        if(this.selectedFile.length){
          console.log("Uploading file to Imgur..");
@@ -64,21 +75,65 @@ export default {
 
 
          $.ajax(settings).done(response => {
-           var str = response.split(",");
-           var getimgurl = str[27].split("\"");
-           console.log(getimgurl[3]);
-           this.$store.state.imgSrc = getimgurl[3];
+
+           this.$store.state.imgSrc = JSON.parse(response).data.link;
            console.log(this.$store.state.imgSrc);
            this.imgSrc = this.$store.state.imgSrc;
-           FirebaseService.postBanner(this.imgSrc);
+           FirebaseService.postBanner(this.$store.state.imgSrc);
          });
        }
 
+     },
+     RandomFile(event){
+       this.$store.state.imgSrc = "https://source.unsplash.com/random";
+       this.imgSrc = this.$store.state.imgSrc;
+       FirebaseService.postBanner(this.imgSrc);
+     },
+     async getBannerImg() {
+        this.banner = await FirebaseService.getBanner()
+        this.$store.state.imgSrc = this.banner[0].img
+        console.log(this.banner[0].img)
      }
    },
    mounted(){
-     this.imgSrc = FirebaseService.getBanner();
+     this.getBannerImg();
+
+
    }
 }
 
 </script>
+
+<style>
+.filebox label {
+  display: inline-block;
+  padding: .5em;
+  color: #ffffff;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 50px;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.filebox label:hover {
+  background-color: RGB(0,0,0,0.1)
+}
+
+.filebox label:active {
+  background-color: RGB(0,0,0,0.5)
+}
+
+.filebox input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+</style>

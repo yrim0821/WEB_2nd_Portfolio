@@ -53,6 +53,14 @@
             <RepositoryList></RepositoryList>
           </v-flex>
         </v-layout>
+
+        <v-layout my-5>
+      <v-flex xs12>
+        <h2 class="headline my-5 text-xs-center"><span style="font-family:'Jeju Hallasan' ; font-size:25pt">그래프테스트</span>
+        </h2>
+        <gitgraph></gitgraph>
+      </v-flex>
+    </v-layout>
       </v-container>
     </div>
   </template>
@@ -63,6 +71,7 @@
   import RepositoryList from '../components/RepositoryList'
   import clock from '../components/clock'
   import firebase from 'firebase/app'
+  import gitgraph from '../components/gitgraph'
 
   export default {
     name: 'HomePage',
@@ -71,7 +80,8 @@
       PortfolioList,
       PostList,
       RepositoryList,
-      clock
+      clock,
+      gitgraph
     },
     methods: {
       getImgUrl(img) {

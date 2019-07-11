@@ -16,7 +16,7 @@
               &copy;2019 — <strong>Vuetify</strong>
             </v-flex> -->
           </v-layout>
-        </v-footer>
+  </v-footer>
 </template>
 
 <script>

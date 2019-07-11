@@ -4,6 +4,7 @@ import 'vuetify/dist/vuetify.min.css'
 import VueSimplemde from 'vue-simplemde'
 import 'simplemde/dist/simplemde.min.css'
 import 'font-awesome/css/font-awesome.min.css'
+import firebase from 'firebase/app'
 
 import App from './App.vue'
 import router from './router'
@@ -37,5 +38,15 @@ Vue.use(VueSimplemde)
 new Vue({
   router,
   store,
+	created(){
+		firebase.auth().onAuthStateChanged(function(user) {
+  		if (user) {
+				
+
+  		} else {
+
+  		}
+		});
+	},
   render: h => h(App)
 }).$mount('#app')

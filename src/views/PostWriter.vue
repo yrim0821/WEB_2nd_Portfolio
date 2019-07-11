@@ -1,15 +1,18 @@
 <template>
-    <div>
+    <div class="notranslate">
         <ImgBanner>
-        <div style="line-height:1.2em;font-size:1.2em;" slot="text" class="notranslate">Post</div>
+        <div style="line-height:1.2em;font-size:1.2em;" slot="text">Post</div>
         </ImgBanner>
 
         <v-container>
             <form>
                 <v-text-field v-model="title" placeholder="제목을 입력해주세요."></v-text-field>
                 <markdown-editor v-model="body" ref="markdownEditor"></markdown-editor>
-                <v-btn v-on:click="postPost(title, body)">submit</v-btn>
-                <v-btn @click='$router.go(-1)'>back</v-btn>
+
+                <v-flex  xs12 text-xs-center round my-5>
+                  <v-btn color="info" v-on:click="postPost(title, body)">submit</v-btn>
+                  <v-btn color="info" @click='$router.go(-1)'>back</v-btn>
+                </v-flex>
             </form>
         </v-container>
     </div>
