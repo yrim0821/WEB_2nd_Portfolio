@@ -1,7 +1,6 @@
 <template>
   <div>
-    <v-img :src="this.$store.state.imgSrc"
-           aspect-ratio="1.7">
+    <v-parallax :src="this.$store.state.imgSrc" aspect-ratio="16/4" height="720">
       <v-layout align-center justify-center row fill-height>
         <v-flex text-xs-center>
           <span class="text-shadow display-2 font-weight-light">
@@ -20,7 +19,7 @@
           </form>
         </div>
       </v-layout>
-    </v-img>
+    </v-parallax>
   </div>
 </template>
 
