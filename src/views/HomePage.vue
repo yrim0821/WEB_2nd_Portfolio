@@ -11,8 +11,10 @@
       <v-layout my-5>
         <v-flex class="aboutMe" :class="$mq" xs8>
           <p class="headline mb-3">About Us
-            <v-btn flat icon @click='refresh()' href="#googtrans(en|ko)"><img src="img/KR.png" alt="KOREA" width="25px"></v-btn>
-            <v-btn flat icon @click='refresh()' href="#googtrans(en|en)"><img src="img/US.png" alt="USA" width="25px"></v-btn>
+
+            <v-btn v-if="this.$store.state.langage==0" flat icon @click='refreshKR()' href="#googtrans(en|ko)"><img src="img/KR.png" alt="KOREA" width="25px"></v-btn>
+            <v-btn v-else flat icon @click='refreshUS()' href="#googtrans(en|en)"><img src="img/US.png" alt="USA" width="25px"></v-btn>
+
           <p class="mr-4" v-line-clamp:20="5">안녕하세요!
             구미 통합 1반 6조입니다. 우리는 다양한 전공자들로 구성되어 있습니다.<br>
             다양한 전공자들이 모여 그룹을 형성하기란 쉽지 않은 일입니다.<br>
@@ -86,8 +88,20 @@ export default {
     clock,
     gitgraph
   },
+  data(){
+    return{
+      toggle_one : localStorage.getItem('langage')
+    }
+  },
   methods: {
-    refresh(){
+    refreshKR(){
+      localStorage.setItem('langage', 1)
+      setTimeout((function() {
+        window.location.reload();
+      }), 250);
+    },
+    refreshUS(){
+      localStorage.setItem('langage', 0)
       setTimeout((function() {
         window.location.reload();
       }), 250);
@@ -95,6 +109,9 @@ export default {
     getImgUrl(img) {
       return require('../assets/team6/logo/' + img)
     },
+  },
+  mounted(){
+    this.$store.state.langage = localStorage.getItem('langage');
   }
 }
 !function(d,s,id){

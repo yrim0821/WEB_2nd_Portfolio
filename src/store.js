@@ -8,6 +8,7 @@ export default new Vuex.Store({
     accessToken: '',
     user: '',
     login: false,
-    imgSrc: ''
+    imgSrc: '',
+    langage: 1
   }
 })

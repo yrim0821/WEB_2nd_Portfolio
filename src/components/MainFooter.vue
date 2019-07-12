@@ -8,20 +8,78 @@
             <a id="footcolor" class="weatherwidget-io" href="https://forecast7.com/en/36d12128d34/gumi-si/" data-label_1="GUMI" data-label_2="WEATHER" data-theme="weather_one" >GUMI WEATHER</a>
           </v-flex>
 
-          <v-flex xs12 text-xs-right>
-            @provided by 맑은유림조 @2019.07.10 @git:lab.ssafy.com
-          </v-flex>
+          <v-dialog v-model="dialog" width="100%">
+            <template v-slot:activator="{ on }">
+              <v-btn flat v-on="on">
+                <router-link to="">@provided by 맑은유림조 @2019.07.10 @git:lab.ssafy.com</router-link>
+              </v-btn>
+            </template>
+
+            <div class="carousel notranslate">
+
+              <div class="slide" style="background:black;">
+                <div class="action" style="top:5%;left:5%">
+                  <div class="text">PRODUCT <br> BY </div>
+                  <div class="action"><span class="blip text">HARMONY</span></div>
+                </div>
+              </div>
+
+
+              <div class="slide" style="background-image:url(https://i.imgur.com/Pk1Cx1N.jpg);">
+                <div class="text">YEONGHOON KIM</div>
+                <div class="action">
+                  <span class="blip"><a href="http://www.naver.com"><font size="50px">Click me</font></a></span>
+                  <span class="action-text"></span>
+                </div>
+              </div>
+
+              <div class="slide" style="background-image: url(https://i.imgur.com/eFcIgEK.jpg)">
+                <div class="text">YURIM KIM</div>
+                <div class="action">
+                  <span class="blip"><a href="http://www.naver.com"><font size="50px">Click me</font></a></span>
+                  <span class="action-text"></span>
+                </div>
+              </div>
+              <div class="slide" style="background-image: url(https://i.imgur.com/KdCfKKg.png)">
+                <div class="text">SUKYEONG LEE</div>
+                <div class="action">
+                  <span class="blip"><a href="http://www.naver.com"><font size="50px">Click me</font></a></span>
+                  <span class="action-text"></span>
+                </div>
+              </div>
+              <div class="slide" style="background-image:url(https://i.imgur.com/7RugBUj.png)">
+                <div class="text">JUYEON SEOK</div>
+                <div class="action">
+                  <span class="blip"><a href="http://www.naver.com"><font size="50px">Click me</font></a></span>
+                  <span class="action-text"></span>
+                </div>
+              </div>
+              <div class="slide" style="background-image: url(https://i.imgur.com/Xc0uYrK.png)">
+                <div class="text" style="color:gray">GYEONGMIN JI</div>
+                <div class="action">
+                  <span class="blip"><a href="http://www.naver.com"><font size="50px">Click me</font></a></span>
+                  <span class="action-text"></span>
+                </div>
+              </div>
+
+            </div>
+
+
+
+          </v-dialog>
 
         </v-layout>
     </v-layout>
   </v-footer>
+
 </div>
 </template>
 
 <script>
 export default {
   data: () => ({
-    drawer: null
+    drawer: null,
+    dialog: false
   })
 };
 !function(d,s,id){
@@ -41,5 +99,66 @@ export default {
   z-index: 1;
   background: rgb(18,194,233);
   background: linear-gradient(90deg, rgba(18,194,233,1) 0%, rgba(196,113,237,1) 46%, rgba(246,79,89,1) 100%);
+}
+
+html, body {
+  @include fullsize();
+}
+
+.slide {
+  position: absolute;
+  width: 400px;
+  height: 300px;
+  left: 50%;
+  top: 20%;
+  margin-left: -200px;
+  margin-top: 50px;
+  box-shadow: 0 0 8px #000;
+}
+
+.text {
+  position: absolute;
+  left: 5%;
+  top: 0;
+  font-family: Arial Black, Arial, sans-serif;
+  font-size: 50px;
+  font-style: italic;
+  font-weight: 700;
+  white-space: nowrap;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.action {
+  position: absolute;
+  bottom: 5%;
+  left: 60%;
+
+  font-family: Arial Black, Arial, sans-serif;
+  font-size: 50px;
+  font-style: italic;
+  font-weight: 700;
+
+  white-space: nowrap;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.blip {
+  position: relative;
+
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  top: -8px;
+  border-radius: 70px;
+
+  margin-right: -10px;
+  vertical-align: middle;
+}
+
+.action-text {
+  color: #fff;
 }
 </style>
