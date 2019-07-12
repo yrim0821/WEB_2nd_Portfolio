@@ -3,7 +3,7 @@
     <div style="margin-top:48px"></div>
     <div class="notranslate">
       <ImgBanner>
-        <div id="bannerTitle" style="line-height:1.2em;" slot="text">Even Dead I'm The Hero.</div>
+        <div id="bannerTitle" style="line-height:1.2em;" slot="text">Orchestrate Life.</div>
       </ImgBanner>
     </div>
     <v-container>
