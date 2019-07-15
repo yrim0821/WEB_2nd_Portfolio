@@ -1,7 +1,29 @@
 <template>
   <div style="margin-top: 50px;">
-    <div class="calendarContainer">
-      <div class="calendarBox" id="calendar_basic" style="width: 800px; height: 250px;"></div>
+    <div v-if='!valueA' class="calendarContainer">
+      <div class="calendarBox" id="calendar_basic" style="width: 1000px; height: 350px;"></div>
+    </div>
+    <div v-if='valueA'>
+      <v-timeline>
+        <v-timeline-item v-for="(data,i) in tlInfo" :key='i' :color="data.color" small>
+          <template v-slot:opposite>
+            <span :class="`headline font-weight-bold ${data.color}--text`">{{data.dayA}}</span>
+          </template>
+          <div v-if='i%2===0' class="py-3 text-lg-right">
+            <h2 :class="`headline font-weight-light mb-3 ${data.color}--text`">{{data.personA}}</h2>
+            <div>
+              {{data.activityA}}
+            </div>
+          </div>
+          <div v-else class="py-3 text-lg-left">
+            <h2 :class="`headline font-weight-light mb-3 ${data.color}--text`">{{data.personA}}</h2>
+            <div>
+              {{data.activityA}}
+            </div>
+          </div>
+        </v-timeline-item>
+      </v-timeline>
+      <v-btn color="info" dark href="https://lab.ssafy.com/Kim_yh/webmobile-sub2/network/master" target="_blank"><v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기</v-btn>
     </div>
     <v-btn fab outline large color="cyan" v-on:click="getCommits()">프로젝트</v-btn>
     <v-btn fab outline color="success" v-on:click="getRepos('myccpb08','5yRamVkqs4Z4bq-G1roY')">유림</v-btn>
@@ -114,10 +136,13 @@ function drawChart(datas) {
 export default {
   data() {
     return {
+      valueA:true,
+      tlInfo:[{dayA:'',personA:'',activityA:'',color:''}]
     };
   },
   methods: {
     getRepos(id, token) {
+      this.valueA=false;
       var request = require("request");
       var headers = {
         "PRIVATE-TOKEN": token
@@ -155,36 +180,53 @@ export default {
     }, // getRepose 끝
 
     // ★★★★★★★★★  프로젝트 commit 가져오는 함수
-    getCommits(id) {
-      var request = require("request");
-      var headers = { "PRIVATE-TOKEN": "5yRamVkqs4Z4bq-G1roY" };
-      var options = {
-        url: "https://lab.ssafy.com/api/v4/projects/6097/repository/commits?",
-        headers: headers
-      };
+    getCommits() {
+      console.log("여기는 커밋입니다")
+      this.valueA=true;
+      fetch(
+        `${BASE_URL}/projects/6097/repository/commits??namespaces&per_page=100&private_token=5yRamVkqs4Z4bq-G1roY`
+      )
+        .then(res => {
+          return res.json();
+        })
+        .then(data => {
+          this.drawTimeline(data);
+        });
+    }, // getcommits 함수 완료
+    drawTimeline(datas){
+          var colorsA =['cyan','green','pink','amber','orange']
+          if (datas != undefined) { // datas 로 반복문 돌림
+            this.tlInfo=[];
+            for (let index = 0; index <5; index++) {
+              var data = datas[index].created_at;
+              if(data == null) continue;
 
-      function callback(error, response, body) {
-        if (!error && response.statusCode == 200) {
-          var howmany = response.headers["x-total"];
-          var total_try = parseInt(howmany / 100) + 1;
+              var year = new Date(data).getFullYear()
+              var month = new Date(data).getMonth() + 1
+              var day = new Date(data).getDate()
+              var temp = year + '.' + month + '.' + day
 
-          for (var trying = 0; trying < total_try; trying++) {
-            fetch(
-              `${BASE_URL}/projects/6097/repository/commits??namespaces&per_page=100&page=${trying+1}&private_token=5yRamVkqs4Z4bq-G1roY`
-            )
-              .then(res => {
-                return res.json();
-              })
-              .then(data => {
-                this.ret = data;
-                console.log(data);
-              });
-          } // 요청부분 완료
+              // this.dayA.push(temp);
+              // this.personA.push(datas[index].committer_name);
+              // this.activityA.push(datas[index].message);
+              this.tlInfo.push({dayA:temp,personA:datas[index].committer_name,activityA:datas[index].message,color:colorsA[index%5]});
+          }  // for문 끝
         }
-      } // callback 함수 정의 완료
-      request(options, callback);
-    } // getcommits 함수 완료
-  } // methods 정의 완료
+    }
+  }, // methods 정의 완료
+  mounted: function(){
+    console.log("여기는 마운트");
+    this.valueA=true;
+    fetch(
+      `${BASE_URL}/projects/6097/repository/commits??namespaces&per_page=100&private_token=5yRamVkqs4Z4bq-G1roY`
+    )
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        this.drawTimeline(data);
+      });
+  }
 };
 </script>
 

@@ -2,7 +2,7 @@
   <div>
     <div style="margin-top:48px"></div>
     <ImgBanner>
-      <div id="bannerTitle" style="line-height:1.2em;font-size:1.2em;" slot="text">Portfolio</div>
+      <div id="bannerTitle" style="line-height:1.2em; font-size:7rem;" slot="text">Portfolio</div>
     </ImgBanner>
     <v-container>
 

@@ -61,8 +61,38 @@ export default {
 }
 #bannerTitle{
   z-index: 1;
-  background: linear-gradient(90deg, rgba(240,20,30,5) 0%, rgba(150,120,220,1) 46%, rgba(250,240,0,5) 100%);
+  /* background: linear-gradient(90deg, rgba(240,20,30,5) 0%, rgba(150,120,220,1) 46%, rgba(250,240,0,5) 100%); */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  	letter-spacing: 0;
+  	padding: .25em 0 .325em;
+	  display: block;
+	  margin: 0 auto;
+  	text-shadow: 0 0 80px rgba(255,255,255,.5);
+
+/* Clip Background Image */
+
+
+    background: url('./assets/team6/bannerTitleColor.png');
+     /*linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);*/
+    -webkit-background-clip: text;
+    background-clip: text;
+    	background-size: 400% 400%;
+    	-webkit-animation: Gradient 15s ease infinite;
+    	-moz-animation: Gradient 15s ease infinite;
+    	animation: Gradient 15s ease infinite;
+
+}
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
 }
 </style>

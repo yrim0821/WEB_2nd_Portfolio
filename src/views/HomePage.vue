@@ -3,7 +3,7 @@
     <div style="margin-top:48px"></div>
     <div class="notranslate">
       <ImgBanner>
-        <div id="bannerTitle" style="line-height:1.2em;" slot="text">Orchestrate Life.</div>
+        <div id="bannerTitle" style="line-height:1.2em; font-size:7rem;" slot="text">Orchestrate Life.</div>
       </ImgBanner>
     </div>
     <v-container>
@@ -62,7 +62,7 @@
       <div class='notranslate'>
         <v-layout my-5 v-show="$mq==='mobile' ? false : true">
           <v-flex xs12>
-            <h2 class="headline my-5 text-xs-center"><span style="font-family:'Jeju Hallasan' ; font-size:25pt">Graph</span>
+            <h2 class="headline my-5 text-xs-center notranslate"><span style="font-family:'Jeju Hallasan'; font-size:18pt;">Graph</span>
             </h2>
             <gitgraph></gitgraph>
           </v-flex>
