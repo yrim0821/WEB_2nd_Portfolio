@@ -45,7 +45,7 @@
       <!-- Post -->
       <v-layout my-5>
         <v-flex xs12>
-          <router-link to="/post"><h2 class="headline my-5 text-xs-center">Post</h2></router-link>
+          <router-link to="/post"><h2 class="headline my-5 text-xs-center notranslate">Post</h2></router-link>
           <PostList :column="$mq==='mobile'?1:2"></PostList>
         </v-flex>
       </v-layout>
@@ -53,19 +53,21 @@
       <!-- Github -->
       <v-layout my-5>
         <v-flex xs12>
-          <h2 class="headline my-5 text-xs-center">Project</h2>
-          <RepositoryList></RepositoryList>
+          <h2 class="headline my-5 text-xs-center notranslate">Project</h2>
+          <RepositoryList class="notranslate"></RepositoryList>
         </v-flex>
       </v-layout>
 
       <!-- Graph -->
-      <v-layout my-5>
-        <v-flex xs12>
-          <h2 class="headline my-5 text-xs-center"><span style="font-family:'Jeju Hallasan' ; font-size:25pt">그래프테스트</span>
-          </h2>
-          <gitgraph></gitgraph>
-        </v-flex>
-      </v-layout>
+      <div class='notranslate'>
+        <v-layout my-5 v-show="$mq==='mobile' ? false : true">
+          <v-flex xs12>
+            <h2 class="headline my-5 text-xs-center"><span style="font-family:'Jeju Hallasan' ; font-size:25pt">Graph</span>
+            </h2>
+            <gitgraph></gitgraph>
+          </v-flex>
+        </v-layout>
+      </div>
     </v-container>
   </div>
 </template>
