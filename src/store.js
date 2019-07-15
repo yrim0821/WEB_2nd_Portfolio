@@ -9,6 +9,7 @@ export default new Vuex.Store({
     user: '',
     login: false,
     imgSrc: '',
-    langage: 1
+    langage: 1,
+    inputimg: ''
   }
 })

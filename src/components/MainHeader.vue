@@ -32,25 +32,25 @@
                 <v-img :src="getImgUrl('login_form.png')" style="width:100%">
 
                   <v-card-text style="margin-top:150px">
-                    <div style="padding-left:50px;">
-                      <v-text-field v-model="loginEmail" label="Email" style="width:250px;"></v-text-field>
-                      <v-text-field v-model="loginPassword" label="Password" type="password" style="width:250px;"></v-text-field>
+                    <div class="notranslate" style="padding-left:50px;">
+                      <v-text-field v-model="loginEmail" label="Email" placeholder="이메일을 입력하세요." style="width:250px;"></v-text-field>
+                      <v-text-field v-model="loginPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password" style="width:250px;"></v-text-field>
 
                       <v-btn round color="#20aa49" dark v-on:click="loginWithMail" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">mail</v-icon> Mail 로그인</v-btn>
                       <v-btn round color="#df4a31" dark v-on:click="loginWithGoogle" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">fa-google</v-icon> Google 로그인</v-btn>
                       <v-btn round color="#4267B2" dark v-on:click="loginWithFacebook" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">fa-facebook</v-icon> Google 로그인</v-btn>
 
-                      <v-dialog v-model="signupDialog" width="500">
+                      <v-dialog class="notranslate" v-model="signupDialog" width="500">
                         <template v-slot:activator="{ on }">
                           <v-btn round color="#888888" dark v-on="on" style="width:230px;height:25px;"><v-icon size="20" class="mr-2">person</v-icon>회원가입</v-btn>
                         </template>
 
-                        <v-card>
+                        <v-card class="notranslate">
                           <v-card-title class="headline grey lighten-2" primary-title>Sign up</v-card-title>
                           <v-card-text>
                             <form>
-                              <v-text-field v-model="signupEmail" label="Email" placeholder="Placeholder"></v-text-field>
-                              <v-text-field v-model="signupPassword" label="Password" placeholder="Placeholder"></v-text-field>
+                              <v-text-field v-model="signupEmail" label="Email" placeholder="이메일을 입력하세요."></v-text-field>
+                              <v-text-field v-model="signupPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password"></v-text-field>
                             </form>
                           </v-card-text>
                           <v-divider></v-divider>
@@ -66,10 +66,6 @@
                     </div>
                   </v-card-text>
 
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="primary" flat @click="loginDialog = false">close</v-btn>
-                  </v-card-actions>
                 </v-img>
               </v-card>
 
@@ -81,6 +77,9 @@
         </v-toolbar>
       </div>
 
+
+
+      <!-- Mobile Login SignUp Form -->
       <v-navigation-drawer temporary style="position:fixed" v-model="sideNav">
         <v-list>
           <v-list-tile v-for="item in menuItems" :key="item.title" :to="item.link">
@@ -90,27 +89,60 @@
             <v-list-tile-content>{{ item.title }}</v-list-tile-content>
           </v-list-tile>
 
+          <v-dialog class="notranslate" v-model="m_loginDialog" max-width="300">
+            <template v-slot:activator="{ on }">
+              <v-list-tile v-if="!$store.state.user" v-on="on">
+                <v-list-tile-action>
+                  <v-icon>exit_to_app</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>Login</v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile v-else v-on:click="logout">
+                <v-list-tile-action>
+                  <v-icon>exit_to_app</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>Logout</v-list-tile-content>
+              </v-list-tile>
+            </template>
 
-          <v-list-tile v-if="!$store.state.user" >
-            <v-list-tile-action>
-              <v-icon>exit_to_app</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>Login</v-list-tile-content>
-          </v-list-tile>
 
-          <v-list-tile v-else v-on:click="logout">
-            <v-list-tile-action>
-              <v-icon>exit_to_app</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>Logout</v-list-tile-content>
-          </v-list-tile>
+            <v-card>
+              <v-card-title class="headline grey lighten-2 notranslate" primary-title>Login</v-card-title>
+              <v-card-text>
+                <div class="notranslate">
+                  <v-text-field v-model="loginEmail" label="Email" placeholder="이메일을 입력하세요." style="width:250px;"></v-text-field>
+                  <v-text-field v-model="loginPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password" style="width:250px;"></v-text-field>
+                  <v-btn round color="#20aa49" dark v-on:click="loginWithMail" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">mail</v-icon> Mail 로그인</v-btn>
+                  <v-btn round color="#df4a31" dark v-on:click="loginWithGoogle" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">fa-google</v-icon> Google 로그인</v-btn>
+                  <v-btn round color="#4267B2" dark v-on:click="loginWithFacebook" style="width:230px;;height:25px;"><v-icon size="20" class="mr-2">fa-facebook</v-icon> Google 로그인</v-btn>
+                  <v-dialog class="notranslate" v-model="m_signupDialog" width="500">
+                    <template v-slot:activator="{ on }">
+                      <v-btn round color="#888888" dark v-on="on" style="width:230px;height:25px;"><v-icon size="20" class="mr-2">person</v-icon>회원가입</v-btn>
+                    </template>
 
-          <v-list-tile v-if="!$store.state.user" >
-            <v-list-tile-action>
-              <v-icon>person</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>SignUp</v-list-tile-content>
-          </v-list-tile>
+                    <v-card class="notranslate">
+                      <v-card-title class="headline grey lighten-2" primary-title>Sign up</v-card-title>
+                      <v-card-text>
+                        <form>
+                          <v-text-field v-model="signupEmail" label="Email" placeholder="이메일을 입력하세요."></v-text-field>
+                          <v-text-field v-model="signupPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password"></v-text-field>
+                        </form>
+                      </v-card-text>
+                      <v-divider></v-divider>
+
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="primary" flat v-on:click="signUp()">SignUp</v-btn>
+                        <v-btn color="primary" flat @click="m_signupDialog = false">close</v-btn>
+                      </v-card-actions>
+                    </v-card>
+
+                  </v-dialog>
+                </div>
+              </v-card-text>
+
+            </v-card>
+          </v-dialog>
 
         </v-list>
       </v-navigation-drawer>
@@ -132,6 +164,8 @@ export default {
       signupPassword: '',
       loginDialog: false,
       signupDialog: false,
+      m_loginDialog: false,
+      m_signupDialog: false,
       sideNav: false,
       user: '',
       accessToken: '',
@@ -181,6 +215,7 @@ export default {
         localStorage.setItem('accessToken', this.$store.state.accessToken)
         localStorage.setItem('user', JSON.stringify(user.user))
         alert(this.$store.state.user.email + "님 로그인 되었습니다")
+        this.closeDialog()
         this.$router.replace('/')
       })
       .catch((error)=>{
@@ -194,6 +229,7 @@ export default {
       localStorage.setItem('accessToken', this.$store.state.accessToken)
       localStorage.setItem('user', JSON.stringify(result.user))
       alert(this.$store.state.user.email + "님 로그인 되었습니다")
+      this.closeDialog()
       this.$router.replace('/')
     },
     async loginWithFacebook() {
@@ -203,14 +239,14 @@ export default {
       localStorage.setItem('accessToken', this.$store.state.accessToken)
       localStorage.setItem('user', JSON.stringify(result.user))
       alert(this.$store.state.user.displayName + "님 로그인 되었습니다")
+      this.closeDialog()
       this.$router.replace('/')
     },
     signUp(){
       firebase.auth().createUserWithEmailAndPassword(this.signupEmail, this.signupPassword)
       .then((user)=>{
         alert("Your account has been created!")
-        this.loginDialog = false;
-        this.signupDialog = false;
+        this.closeDialog()
         this.$router.replace('/')
       })
       .catch((error)=>{
@@ -233,14 +269,20 @@ export default {
           this.$store.state.user = '';
           localStorage.setItem('accessToken', this.$store.state.accessToken)
           localStorage.setItem('user', this.$store.state.user)
-          this.loginDialog = false;
-          this.signupDialog = false;
+          this.closeDialog()
           this.$router.replace('/')
         }).catch(function(error) {
           alert(error);
         });
       }
 
+    },
+    closeDialog(){
+      this.loginDialog = false;
+      this.signupDialog = false;
+      this.m_loginDialog = false;
+      this.m_signupDialog = false;
+      this.sideNav = false;
     }
   },
   mounted(){
