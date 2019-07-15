@@ -88,7 +88,7 @@ var chart = new CanvasJS.Chart(id, {
     yValueFormatString: "#,###",
     xValueFormatString: "#,###",
     type: "spline",
-    lineColor: "blue",
+    lineColor: "orange",
     dataPoints: data,
     lineThickness: 5,
      markerType:'circle',
