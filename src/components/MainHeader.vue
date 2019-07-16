@@ -285,9 +285,7 @@ export default {
     }
   },
   mounted(){
-    if(localStorage.getItem("user")==null || localStorage.getItem("user")==''){
-
-    }else{
+    if(localStorage.getItem("user")!=null && localStorage.getItem("user")!=''){
       this.$store.state.user = JSON.parse(localStorage.getItem("user") || "{}");
       this.$store.state.accessToken = localStorage.getItem('accessToken');
     }

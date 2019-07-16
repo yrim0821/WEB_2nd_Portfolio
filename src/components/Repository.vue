@@ -26,15 +26,18 @@
            <v-divider></v-divider>
              <!-- <h4 class="mt-3">{{ repos.owner.name }}님 프로젝트 <v-icon> arrow_downward</v-icon> </h4> -->
 
-             <h4 class="mt-3" style="font-size:20px">
+             <h3 class="mt-3 notranslate">
                {{ repos.owner.name }}님 프로젝트 More
                <v-btn fab small v-on:click="test2(flags, repos.owner.username)">
-                 <v-icon class="notranslate"> arrow_downward</v-icon>
+                 <v-icon> arrow_downward</v-icon>
                </v-btn>
-             </h4>
-            <ul v-if="flags">
-              <li v-for="n in three" class="notranslate" style="font-size:20px">  {{ n }} </li>
-            </ul>
+             </h3>
+             <div class="mt-0" v-if="flags">
+               <h3>전체 작업 프로젝트 : {{ totallength }} 개 </h3>
+             </div>
+             <ul v-if="flags">
+               <li v-for="n in three" style="font-size:20px">  {{ n }} </li>
+             </ul>
         </v-card-text>
 
 
@@ -122,6 +125,7 @@ export default {
       flags : false,
       three : [],
       link : [],
+      totallength:0,
     };
   },
   mounted() {
@@ -180,6 +184,7 @@ export default {
      if(response.status !== 200) {
        return
      }
+     this.totallength = response.data.length
      var ssample = [response.data[1].path_with_namespace,
      response.data[2].path_with_namespace,response.data[3].path_with_namespace ]
 
