@@ -1,8 +1,10 @@
 <template>
   <div style="margin-top: 50px;">
+    <div id="testcontainer">
     <div v-if='!valueA' class="calendarContainer">
-      <div class="calendarBox" id="calendar_basic" style="width: 1000px; height: 350px;"></div>
+      <div class="calendarBox" id="calendar_basic"></div>
     </div>
+
     <div v-if='valueA'>
       <v-timeline>
         <v-timeline-item v-for="(data,i) in tlInfo" :key='i' :color="data.color" small>
@@ -23,15 +25,15 @@
           </div>
         </v-timeline-item>
       </v-timeline>
-      <v-btn color="info" dark href="https://lab.ssafy.com/Kim_yh/webmobile-sub2/network/master" target="_blank"><v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기</v-btn>
-    </div>
-    <v-btn fab outline large color="cyan" v-on:click="getCommits()">프로젝트</v-btn>
-    <v-btn fab outline color="success" v-on:click="getRepos('myccpb08','5yRamVkqs4Z4bq-G1roY')">유림</v-btn>
-    <v-btn fab outline color="success" v-on:click="getRepos('Kim_yh', 'N9RKhWdxvbGzn3oYEwVe')">영훈</v-btn>
-    <v-btn fab outline color="success" v-on:click="getRepos('JIGyeongmin', 'yYcb5LEDsxxbN1PPxKEj')">경민</v-btn>
-    <v-btn fab outline color="success" v-on:click="getRepos('LeeSuKyeong','dCp7MpuwFQNzYrLBZix5')">수경</v-btn>
-    <v-btn fab outline color="success" v-on:click="getRepos('seok','xTftb51x12NTwFbxxAC5')">주연</v-btn>
+      <v-btn class="morebtn" href="https://lab.ssafy.com/Kim_yh/webmobile-sub2/network/master"><v-icon size="25">fa-plus</v-icon>&nbsp; 더 보기</v-btn>    </div>
+    <v-btn fab outline large v-on:click="getCommits()" class="btn1">프로젝트</v-btn>
+    <v-btn fab outline v-on:click="getRepos('myccpb08','5yRamVkqs4Z4bq-G1roY')" class="btn2">유림</v-btn>
+    <v-btn fab outline v-on:click="getRepos('Kim_yh', 'N9RKhWdxvbGzn3oYEwVe')" class="btn2">영훈</v-btn>
+    <v-btn fab outline v-on:click="getRepos('JIGyeongmin', 'yYcb5LEDsxxbN1PPxKEj')" class="btn2">경민</v-btn>
+    <v-btn fab outline v-on:click="getRepos('LeeSuKyeong','dCp7MpuwFQNzYrLBZix5')" class="btn2">수경</v-btn>
+    <v-btn fab outline v-on:click="getRepos('seok','xTftb51x12NTwFbxxAC5')" class="btn2">주연</v-btn>
   </div>
+</div>
 </template>
 
 <script>
@@ -231,19 +233,28 @@ export default {
 </script>
 
 <style>
-
-
+.btn1{
+  color: #FF8224 !important;
+  font-size: 25px;
+}
+.btn2{
+  color: #F2CB61 !important;
+  font-size: 20px;
+}
 @font-face { font-family: 'BBTreeGR'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGR.woff') format('woff'); font-weight: normal; font-style: normal; }
 .calendarContainer {
+  padding: auto;
   position: relative;
-  width: 100px;
   height: 250px;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .calendarBox {
-  position: absolute;
-  top: 10%;
-  left: 1%;
-  margin: auto;
+  margin-left:10vw;
 }
+#testcontainer{
+  text-align: center;
+}
+
 </style>

@@ -26,22 +26,24 @@
           <v-img :src="getImgUrl('harmony.png')" aspect-ratio="1.5" />
         </v-flex>
       </v-layout>
-      <!--clock-->
 
+      <!--clock-->
       <v-layout my-5>
         <v-flex xs12>
           <clock/>
         </v-flex>
       </v-layout>
+
       <!-- Portfolio -->
       <v-layout my-5>
         <v-flex xs12>
           <router-link to="/portfolio">
-            <h2 class="headline my-5 text-xs-center">Portfolio</h2>
+            <h2 class="headline my-5 text-xs-center notranslate">Portfolio</h2>
             <PortfolioList :column="$mq==='mobile'?1:2"></PortfolioList>
           </router-link>
         </v-flex>
       </v-layout>
+
       <!-- Post -->
       <v-layout my-5>
         <v-flex xs12>
@@ -53,8 +55,16 @@
       <!-- Github -->
       <v-layout my-5>
         <v-flex xs12>
-          <h2 class="headline my-5 text-xs-center notranslate">Project</h2>
-          <RepositoryList class="notranslate"></RepositoryList>
+          <h2 class="headline my-5 text-xs-center notranslate"><span style="font-size:25pt;">Project</span>
+          </h2>
+          <v-layout align-center>
+            <v-flex xs6 grow>
+              <RepositoryList class="notranslate"></RepositoryList>
+            </v-flex>
+            <v-flex xs6 shrink class="show-on-scroll">
+              <membersgraph></membersgraph>
+            </v-flex>
+          </v-layout>
         </v-flex>
       </v-layout>
 
@@ -72,6 +82,7 @@
   </div>
 </template>
 <script>
+import membersgraph from '../components/membersgraph'
 import ImgBanner from '../components/ImgBanner'
 import PortfolioList from '../components/PortfolioList'
 import PostList from '../components/PostList'
@@ -88,7 +99,8 @@ export default {
     PostList,
     RepositoryList,
     clock,
-    gitgraph
+    gitgraph,
+    membersgraph
   },
   data(){
     return{
@@ -142,4 +154,42 @@ export default {
   overflow-y: scroll;
 }
 
+.headline.my-5.text-xs-center{
+  margin: auto;
+  color:#1AAB8A;
+  border:none;
+  position:relative;
+  width: 30%;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  padding: 15px 0px;
+}
+
+.headline.my-5.text-xs-center:hover{
+  background:#1AAB8A;
+  color:#fff;
+}
+.headline.my-5.text-xs-center:before,.headline.my-5.text-xs-center:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:100%;
+  background: #1AAB8A;
+  transition:400ms ease all;
+
+}
+.headline.my-5.text-xs-center:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+  background:#1AAB8A;
+}
+.headline.my-5.text-xs-center:hover:before,.headline.my-5.text-xs-center:hover:after{
+  width:0;
+  transition:800ms ease all;
+}
 </style>

@@ -11,8 +11,8 @@
       </v-flex>
 
       <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
-        <v-btn color="info" dark v-on:click="loadMorePortfolios"><v-icon size="25" class="mr-2">fa-plus</v-icon>View more</v-btn>
-        <router-link to="/portfoliowriter"><v-btn color="info" dark v-on:click="loadMorePortfolios">
+        <v-btn v-on:click="loadMorePortfolios" class="movebtn button1"><v-icon size="25" class="mr-2">fa-plus</v-icon>View more</v-btn>
+        <router-link to="/portfoliowriter"><v-btn v-on:click="loadMorePortfolios"  class="movebtn button2">
           <v-icon size="25" class="mr-2">create</v-icon>Write</v-btn></router-link>
         </v-flex>
       </v-layout>

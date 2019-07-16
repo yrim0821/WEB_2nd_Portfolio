@@ -46,7 +46,7 @@
                         </template>
 
                         <v-card class="notranslate">
-                          <v-card-title class="headline grey lighten-2" primary-title>Sign up</v-card-title>
+                          <v-card-title class="headline" primary-title>Sign up</v-card-title>
                           <v-card-text>
                             <form>
                               <v-text-field v-model="signupEmail" label="Email" placeholder="이메일을 입력하세요."></v-text-field>
@@ -57,8 +57,8 @@
 
                           <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="primary" flat v-on:click="signUp()">SignUp</v-btn>
-                            <v-btn color="primary" flat @click="signupDialog = false">close</v-btn>
+                            <v-btn flat v-on:click="signUp()">SignUp</v-btn>
+                            <v-btn flat @click="signupDialog = false">close</v-btn>
                           </v-card-actions>
                         </v-card>
 
@@ -119,23 +119,22 @@
                     <template v-slot:activator="{ on }">
                       <v-btn round color="#888888" dark v-on="on" style="width:230px;height:25px;"><v-icon size="20" class="mr-2">person</v-icon>회원가입</v-btn>
                     </template>
+                      <v-card class="notranslate" id="mobile_login_form">
+                        <v-card-title class="headline" primary-title>Sign up</v-card-title>
+                        <v-card-text>
+                          <form>
+                            <v-text-field v-model="signupEmail" label="Email" placeholder="이메일을 입력하세요."></v-text-field>
+                            <v-text-field v-model="signupPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password"></v-text-field>
+                          </form>
+                        </v-card-text>
+                        <v-divider></v-divider>
 
-                    <v-card class="notranslate">
-                      <v-card-title class="headline grey lighten-2" primary-title>Sign up</v-card-title>
-                      <v-card-text>
-                        <form>
-                          <v-text-field v-model="signupEmail" label="Email" placeholder="이메일을 입력하세요."></v-text-field>
-                          <v-text-field v-model="signupPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password"></v-text-field>
-                        </form>
-                      </v-card-text>
-                      <v-divider></v-divider>
-
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="primary" flat v-on:click="signUp()">SignUp</v-btn>
-                        <v-btn color="primary" flat @click="m_signupDialog = false">close</v-btn>
-                      </v-card-actions>
-                    </v-card>
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn flat v-on:click="signUp()">SignUp</v-btn>
+                          <v-btn flat @click="m_signupDialog = false">close</v-btn>
+                        </v-card-actions>
+                      </v-card>
 
                   </v-dialog>
                 </div>
@@ -299,6 +298,9 @@ export default {
 
 
 <style>
+.notranslate.v-card.v-sheet.theme--light{
+  background-image: url('../assets/team6/logo/sing_up_form.png')!important;
+}
 #breadth_logo{
   width: 140px;
 }
@@ -311,5 +313,65 @@ export default {
 a{
   text-decoration: none;
   font-size: 20px;
+}
+#header a{
+  color: #555 !important;
+}
+#header a:before {
+  content: '';
+  border-bottom: solid 1px #d9534f;
+  position: absolute;
+  bottom: 0; left: 10%;
+  width: 0;
+  -webkit-transform: scale(0);
+     -moz-transform: scale(0);
+      -ms-transform: scale(0);
+       -o-transform: scale(0);
+          transform: scale(0);
+}
+
+
+#header a:hover:before {
+  border-bottom: solid thin #d9534f;
+  width: 90%;
+  -webkit-animation: heartbeat-x 1.7s infinite ease-in;
+          animation: heartbeat-x 1.7s infinite ease-in;
+}
+
+#header a:hover {
+  -webkit-animation: heartbeat 1.7s infinite ease-in;
+          animation: heartbeat 1.7s infinite ease-in;
+}
+
+@-webkit-keyframes heartbeat {
+  0% { -webkit-transform: scale(1); }
+  10% { -webkit-transform: scale(1.1); }
+  20% { -webkit-transform: scale(1); }
+  30% { -webkit-transform: scale(1.1); }
+  40% { -webkit-transform: scale(1); }
+}
+
+@-webkit-keyframes heartbeat-x {
+  0% { -webkit-transform: scaleX(0); }
+  10% { -webkit-transform: scaleX(1); }
+  20% { -webkit-transform: scaleX(0); }
+  30% { -webkit-transform: scaleX(1); }
+  40% { -webkit-transform: scaleX(0); }
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  10% { transform: scale(1.1); }
+  20% { transform: scale(1); }
+  30% { transform: scale(1.1); }
+  40% { transform: scale(1); }
+}
+
+@keyframes heartbeat-x {
+  0% { transform: scaleX(0); }
+  10% { transform: scaleX(1); }
+  20% { transform: scaleX(0); }
+  30% { transform: scaleX(1); }
+  40% { transform: scaleX(0); }
 }
 </style>

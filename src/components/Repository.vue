@@ -189,3 +189,11 @@ export default {
     } //method
 }; // default
 </script>
+<style>
+  h2{
+    color: rgb(35,200,178);
+  }
+  .v-btn__content{
+    font-size: 20px;
+  }
+</style>

@@ -9,8 +9,8 @@
         <v-divider></v-divider>
       </v-flex>
       <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
-        <v-btn color="info" dark v-on:click="loadMorePosts"><v-icon size="25" class="mr-2">fa-plus</v-icon>View more</v-btn>
-        <router-link to="/postwriter"><v-btn color="info" dark v-on:click="loadMorePosts">
+        <v-btn v-on:click="loadMorePosts" class="movebtn button2"><v-icon size="25" class="mr-2">fa-plus</v-icon>View more</v-btn>
+        <router-link to="/postwriter"><v-btn v-on:click="loadMorePosts" class="movebtn button3">
         <v-icon size="25" class="mr-2 notranslate">create</v-icon>Write</v-btn></router-link>
       </v-flex>
     </v-layout>
