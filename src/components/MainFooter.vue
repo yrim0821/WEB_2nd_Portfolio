@@ -11,7 +11,7 @@
           <v-dialog v-model="dialog" width="100%">
             <template v-slot:activator="{ on }">
               <v-btn flat v-on="on">
-                <router-link to="">@provided by 맑은유림조 @2019.07.10 @git:lab.ssafy.com</router-link>
+                <router-link to="" id="foottitle">@provided by HARMONY @2019.07.10 @git:lab.ssafy.com</router-link>
               </v-btn>
             </template>
 
@@ -95,10 +95,18 @@ export default {
 </script>
 
 <style scoped>
+#foottitle{
+  color: white!important;
+  font-size: 2vw;
+}
 #footcolor{
   z-index: 1;
-  background: rgb(18,194,233);
-  background: linear-gradient(90deg, rgba(18,194,233,1) 0%, rgba(196,113,237,1) 46%, rgba(246,79,89,1) 100%);
+  background: linear-gradient(45deg, rgba(18,194,233,1) 0%, rgba(196,113,237,1) 46%, rgba(246,79,89,1) 100%);
+   background-size: 400% 400%;
+   -webkit-animation: Gradient 5s ease infinite;
+   -moz-animation: Gradient 5s ease infinite;
+   animation: Gradient 5s ease infinite;
+
 }
 
 html, body {
@@ -160,5 +168,16 @@ html, body {
 
 .action-text {
   color: #fff;
+}
+@-webkit-keyframes Gradient {
+   0% {
+      background-position: 0% 50%
+   }
+   50% {
+      background-position: 100% 50%
+   }
+   100% {
+      background-position: 0% 50%
+   }
 }
 </style>

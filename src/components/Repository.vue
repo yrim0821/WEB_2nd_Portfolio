@@ -9,7 +9,7 @@
         <!-- dialog 테스트 -->
            <v-dialog v-model="dialog" width="500">
             <template v-slot:activator="{ on }">
-                <v-btn color="green" flat v-on="on" v-on:click="test(repos.owner.username)" >{{repos.owner.name}}님 자세히</v-btn>
+                <v-btn  color="green" flat v-on="on" v-on:click="test(repos.owner.username)" style="font-size:20px">{{repos.owner.name}}님 자세히</v-btn>
              </template>
 
       <v-card>
@@ -26,6 +26,15 @@
            <v-divider></v-divider>
              <!-- <h4 class="mt-3">{{ repos.owner.name }}님 프로젝트 <v-icon> arrow_downward</v-icon> </h4> -->
 
+             <h4 class="mt-3" style="font-size:20px">
+               {{ repos.owner.name }}님 프로젝트 More
+               <v-btn fab small v-on:click="test2(flags, repos.owner.username)">
+                 <v-icon class="notranslate"> arrow_downward</v-icon>
+               </v-btn>
+             </h4>
+            <ul v-if="flags">
+              <li v-for="n in three" class="notranslate" style="font-size:20px">  {{ n }} </li>
+            </ul>
         </v-card-text>
 
 
@@ -110,6 +119,9 @@ export default {
     return {
       dialog : false,
       stats: {},
+      flags : false,
+      three : [],
+      link : [],
     };
   },
   mounted() {
@@ -152,11 +164,27 @@ export default {
           } // for문 끝 요청부분 완료
 
       }} // callback 함수 완료
-      request(options, callback);
+    request(options, callback);
     }, // getRepose
 
     test(username) {
       this.getRepos(username, tokens[username]);
+    },
+
+    test2(flags,username) {
+     this.flags = !flags
+     this.getGitlabRepos(username, tokens[username])},
+
+   async getGitlabRepos(userName, token) {
+     const response = await GitlabService.getRepos(userName, token)
+     if(response.status !== 200) {
+       return
+     }
+     var ssample = [response.data[1].path_with_namespace,
+     response.data[2].path_with_namespace,response.data[3].path_with_namespace ]
+
+     this.three = ssample
+
     },
     } //method
 }; // default
