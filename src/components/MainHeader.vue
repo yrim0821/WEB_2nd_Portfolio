@@ -14,6 +14,11 @@
           <v-spacer></v-spacer>
 
           <v-toolbar-items class="hidden-xs-only">
+
+            <!-- audio -->
+            <v-btn @click='bgm()'>:D</v-btn>
+                <audio id='bgm' autoplay loop><source src='bgm.wav' type='audio/wav'></audio>
+
             <v-btn flat>
               <router-link to="/portfolio">Portfolio</router-link>
             </v-btn>
@@ -21,6 +26,7 @@
               <router-link to="/post">Post</router-link>
             </v-btn>
 
+            <!-- login SignUp Form -->
             <v-dialog v-if="!$store.state.user" v-model="loginDialog" width="380">
               <template v-slot:activator="{ on }">
                 <v-btn flat v-on="on">
@@ -36,14 +42,15 @@
                       <v-text-field v-model="loginEmail" label="Email" placeholder="이메일을 입력하세요." style="width:250px;"></v-text-field>
                       <v-text-field v-model="loginPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password" style="width:250px;"></v-text-field>
                     </div>
-                    <div class="notranslate" style="width:150px; margin: 0 auto; text-align:center">
+                    <div class="notranslate" style="width:150px; margin: 0 auto; margin-top: 20px; text-align:center">
                       <v-btn flat icon round color="#20aa49" dark v-on:click="loginWithMail" style="width:25px;height:25px;"><v-icon size="20" class="mr-2">mail</v-icon></v-btn>
                       <v-btn flat icon round color="#df4a31" dark v-on:click="loginWithGoogle" style="width:25px;height:25px;"><v-icon size="20" class="mr-2">fa-google</v-icon></v-btn>
                       <v-btn flat icon round color="#4267B2" dark v-on:click="loginWithFacebook" style="width:25px;height:25px;"><v-icon size="20" class="mr-2">fa-facebook</v-icon></v-btn>
                       <br>
-                      <v-dialog class="notranslate" v-model="signupDialog">
-                        <template v-slot:activator="{ on }">
-                          <v-btn flat icon round dark v-on="on" style="height:25px; color:RGB(255,255,255,0.55)"><p style="font-size:18px;">Sing Up</p></v-btn>
+
+                      <v-dialog class="notranslate" v-model="signupDialog" width="380">
+                        <template v-slot:activator="{ on }" >
+                          <v-btn flat icon round dark v-on="on" style="height:35px; color:RGB(255,255,255,0.55)"><p style="margin-top: 20px; font-size:18px;">Sing Up</p></v-btn>
                         </template>
 
                         <v-card class="notranslate">
@@ -64,9 +71,9 @@
                         </v-card>
 
                       </v-dialog>
+                      <p style="margin-top: 20px; font-size:12px; color:RGB(255,255,255,0.65)">@provided by HARMONY @2019.07.10 @git:lab.ssafy.com</p>
                     </div>
                   </v-card-text>
-
                 </v-img>
               </v-card>
 
@@ -106,11 +113,10 @@
               </v-list-tile>
             </template>
 
-
             <v-card>
               <v-img :src="getImgUrl('mobile_login_form.png')" style="width:100%">
                 <!-- <v-card-title class="headline grey lighten-2 notranslate" primary-title>Login</v-card-title> -->
-                <v-card-text style="margin-top:145px">
+                <v-card-text style="margin-top:110px">
                   <div class="notranslate" style="padding-left:40px; text-align:center;">
                     <v-text-field v-model="loginEmail" label="Email" placeholder="이메일을 입력하세요." style="width:155px;"></v-text-field>
                     <v-text-field v-model="loginPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password" style="width:158px;"></v-text-field>
@@ -140,8 +146,8 @@
                             <v-btn flat @click="m_signupDialog = false">close</v-btn>
                           </v-card-actions>
                         </v-card>
-
                     </v-dialog>
+                    <p style="margin-top: 10px; font-size:12px; color:RGB(255,255,255,0.65)">@provided by HARMONY @2019.07.10 @git:lab.ssafy.com</p>
                   </div>
                 </v-card-text>
               </v-img>
@@ -161,6 +167,7 @@ export default {
   name: 'MainHeader',
   data () {
     return{
+      audioFlag:false,
       loginEmail: '',
       loginPassword: '',
       signupEmail: '',
@@ -180,6 +187,16 @@ export default {
     }
   },
   methods: {
+    bgm(){
+    var cBgm = document.getElementById("bgm");
+      if(this.audioFlag==true){
+        cBgm.play();
+        this.audioFlag=false;
+      }else if(this.audioFlag==false){
+        cBgm.pause();
+        this.audioFlag=true;
+      }
+    },
     getImgUrl(img) {
       return require('../assets/team6/logo/' + img)
     },
@@ -289,11 +306,13 @@ export default {
     }
   },
   mounted(){
+    var cBgm = document.getElementById("bgm");
+    cBgm.autoplay();
+    this.audioFlag=false;
     if(localStorage.getItem("user")!=null && localStorage.getItem("user")!=''){
       this.$store.state.user = JSON.parse(localStorage.getItem("user") || "{}");
       this.$store.state.accessToken = localStorage.getItem('accessToken');
     }
-
   }
 }
 </script>
@@ -303,22 +322,27 @@ export default {
 .notranslate.v-card.v-sheet.theme--light{
   background-image: url('../assets/team6/logo/sing_up_form.png')!important;
 }
+
 #breadth_logo{
   width: 140px;
 }
+
 #header{
   position: fixed;
   z-index: 6;
   background-color: white;
   width:100%;
 }
+
 a{
   text-decoration: none;
   font-size: 20px;
 }
+
 #header a{
   color: #555 !important;
 }
+
 #header a:before {
   content: '';
   border-bottom: solid 1px #d9534f;
@@ -331,7 +355,6 @@ a{
        -o-transform: scale(0);
           transform: scale(0);
 }
-
 
 #header a:hover:before {
   border-bottom: solid thin #d9534f;

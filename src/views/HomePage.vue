@@ -10,10 +10,13 @@
       <!-- About Me -->
       <v-layout my-5>
         <v-flex class="aboutMe" :class="$mq" xs8>
-          <p class="headline mb-3">About Us
+          <h2 class="notranslate">
+            <span style="font-size:25pt;">About Us</span>
+
 
             <v-btn v-if="this.$store.state.langage==0" flat icon @click='refreshKR()' href="#googtrans(en|ko)"><img src="img/KR.png" alt="KOREA" width="25px"></v-btn>
             <v-btn v-else flat icon @click='refreshUS()' href="#googtrans(en|en)"><img src="img/US.png" alt="USA" width="25px"></v-btn>
+          </h2>
 
           <p class="mr-4" v-line-clamp:20="5">안녕하세요!
             구미 통합 1반 6조입니다. 우리는 다양한 전공자들로 구성되어 있습니다.<br>
@@ -21,7 +24,6 @@
             우리 조의 콘셉트는 서로가 서로를 포용하며 조화를 이루는 것입니다.
           </p>
         </v-flex>
-
 
         <div class="cubeshape cube" v-show="$mq==='mobile' ? false : true">
           <v-flex class="first_cube">
@@ -35,7 +37,6 @@
 
       </v-layout>
 
-
       <!--clock-->
       <v-layout :class="$mq" my-5 v-show="$mq==='mobile' ? true : false">
         <v-flex xs12>
@@ -43,31 +44,49 @@
         </v-flex>
       </v-layout>
 
-      <div style="margin-top:100px"></div>
+      <div style="margin-top:200px"></div>
+
+
       <!-- Portfolio -->
       <v-layout my-5>
         <v-flex xs12>
           <router-link to="/portfolio">
             <h2 class="notranslate">Portfolio</h2>
+            <hr>
             <PortfolioList :column="$mq==='mobile'?1:2"></PortfolioList>
           </router-link>
         </v-flex>
       </v-layout>
 
+      <div style="margin-top:150px"></div>
+
       <!-- Post -->
       <v-layout my-5>
         <v-flex xs12>
-          <router-link to="/post"><h2 class="notranslate">Post</h2></router-link>
+          <router-link to="/post">
+            <h2 class="notranslate">Post</h2>
+            <hr>
+          </router-link>
           <PostList :column="$mq==='mobile'?1:2"></PostList>
         </v-flex>
       </v-layout>
+
+      <div style="margin-top:150px"></div>
 
       <!-- Github -->
       <v-layout my-5>
         <v-flex xs12>
           <h2 class="notranslate"><span style="font-size:25pt;">Project</span>
           </h2>
-          <v-layout align-center>
+          <v-layout column v-if="$mq==='mobile'" >
+            <v-flex xs12>
+              <RepositoryList class="notranslate"></RepositoryList>
+            </v-flex>
+            <v-flex xs12 class="show-on-scroll">
+              <membersgraph></membersgraph>
+            </v-flex>
+          </v-layout>
+          <v-layout v-else align-center>
             <v-flex xs6 grow>
               <RepositoryList class="notranslate"></RepositoryList>
             </v-flex>
@@ -78,16 +97,23 @@
         </v-flex>
       </v-layout>
 
+      <div style="margin-top:150px"></div>
+
       <!-- Graph -->
       <div class='notranslate'>
         <v-layout my-5 v-show="$mq==='mobile' ? false : true">
           <v-flex xs12>
-            <h2 class="notranslate"><span style="font-family:'Jeju Hallasan'; font-size:18pt;">Graph</span>
+            <h2 class="notranslate">
+              <span style="font-size:25pt;">Graph</span>
             </h2>
+            <hr>
             <gitgraph></gitgraph>
           </v-flex>
         </v-layout>
       </div>
+
+      <div style="margin-top:150px"></div>
+
     </v-container>
   </div>
 </template>
@@ -151,6 +177,13 @@ export default {
 </script>
 
 <style>
+h2{
+  color: black;
+}
+hr{
+  border-color: RGB(155, 155, 155, 0.5);
+}
+
 .aboutMe.mobile{
   text-align: center;
   margin: 0 auto;
@@ -160,9 +193,6 @@ export default {
 .aboutMe.mr-4{
   overflow-y: scroll;
 }
-
-
-
 
 .cubeshape {
    width: 350px;

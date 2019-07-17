@@ -85,14 +85,11 @@ export default {
   }, // data 끝
 
   mounted() {
-
-    setInterval(()=>{
-      getRepos('myccpb08', '5yRamVkqs4Z4bq-G1roY')
-      getRepos('Kim_yh', 'N9RKhWdxvbGzn3oYEwVe')
-      getRepos('JIGyeongmin', 'yYcb5LEDsxxbN1PPxKEj')
-      getRepos('LeeSuKyeong', 'dCp7MpuwFQNzYrLBZix5')
-      getRepos('seok', 'xTftb51x12NTwFbxxAC5')},3000)
-
+    getRepos('myccpb08', '5yRamVkqs4Z4bq-G1roY')
+    getRepos('Kim_yh', 'N9RKhWdxvbGzn3oYEwVe')
+    getRepos('JIGyeongmin', 'yYcb5LEDsxxbN1PPxKEj')
+    getRepos('LeeSuKyeong', 'dCp7MpuwFQNzYrLBZix5')
+    getRepos('seok', 'xTftb51x12NTwFbxxAC5')
   },
 
   methods: {
