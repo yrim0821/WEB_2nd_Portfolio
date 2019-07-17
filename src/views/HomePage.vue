@@ -22,23 +22,33 @@
           </p>
         </v-flex>
 
-        <v-flex class="profileImg" :class="$mq" xs4>
-          <v-img :src="getImgUrl('harmony.png')" aspect-ratio="1.5" />
-        </v-flex>
+
+        <div class="cubeshape cube" v-show="$mq==='mobile' ? false : true">
+          <v-flex class="first_cube">
+            <v-img :src="getImgUrl('harmony.png')" style="height:200px"/>
+          </v-flex>
+
+          <v-flex class="second_cube">
+            <clock style="font-size:5px; height:650%"/>
+          </v-flex>
+        </div>
+
       </v-layout>
 
+
       <!--clock-->
-      <v-layout my-5>
+      <v-layout :class="$mq" my-5 v-show="$mq==='mobile' ? true : false">
         <v-flex xs12>
           <clock/>
         </v-flex>
       </v-layout>
 
+      <div style="margin-top:100px"></div>
       <!-- Portfolio -->
       <v-layout my-5>
         <v-flex xs12>
           <router-link to="/portfolio">
-            <h2 class="headline my-5 text-xs-center notranslate">Portfolio</h2>
+            <h2 class="notranslate">Portfolio</h2>
             <PortfolioList :column="$mq==='mobile'?1:2"></PortfolioList>
           </router-link>
         </v-flex>
@@ -47,7 +57,7 @@
       <!-- Post -->
       <v-layout my-5>
         <v-flex xs12>
-          <router-link to="/post"><h2 class="headline my-5 text-xs-center notranslate">Post</h2></router-link>
+          <router-link to="/post"><h2 class="notranslate">Post</h2></router-link>
           <PostList :column="$mq==='mobile'?1:2"></PostList>
         </v-flex>
       </v-layout>
@@ -55,7 +65,7 @@
       <!-- Github -->
       <v-layout my-5>
         <v-flex xs12>
-          <h2 class="headline my-5 text-xs-center notranslate"><span style="font-size:25pt;">Project</span>
+          <h2 class="notranslate"><span style="font-size:25pt;">Project</span>
           </h2>
           <v-layout align-center>
             <v-flex xs6 grow>
@@ -72,7 +82,7 @@
       <div class='notranslate'>
         <v-layout my-5 v-show="$mq==='mobile' ? false : true">
           <v-flex xs12>
-            <h2 class="headline my-5 text-xs-center notranslate"><span style="font-family:'Jeju Hallasan'; font-size:18pt;">Graph</span>
+            <h2 class="notranslate"><span style="font-family:'Jeju Hallasan'; font-size:18pt;">Graph</span>
             </h2>
             <gitgraph></gitgraph>
           </v-flex>
@@ -141,9 +151,6 @@ export default {
 </script>
 
 <style>
-.profileImg.mobile{
-  display: none;
-}
 .aboutMe.mobile{
   text-align: center;
   margin: 0 auto;
@@ -154,42 +161,52 @@ export default {
   overflow-y: scroll;
 }
 
-.headline.my-5.text-xs-center{
-  margin: auto;
-  color:#1AAB8A;
-  border:none;
-  position:relative;
-  width: 30%;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-  padding: 15px 0px;
+
+
+
+.cubeshape {
+   width: 350px;
+   text-align: center;
+   margin: 0 auto;
+   height: 100px;
+  text-transform: uppercase;
+   font-family: sans-serif;
 }
 
-.headline.my-5.text-xs-center:hover{
-  background:#1AAB8A;
-  color:#fff;
+.cube {
+   -webkit-transition: -webkit-transform .33s;
+   transition: transform .33s; /* Animate the transform properties */
+   -webkit-transform-style: preserve-3d;
+   transform-style: preserve-3d;
 }
-.headline.my-5.text-xs-center:before,.headline.my-5.text-xs-center:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:100%;
-  background: #1AAB8A;
-  transition:400ms ease all;
 
+
+.first_cube,.second_cube {
+   height: 100px;
+   width: 100%;
+  position: relative;
 }
-.headline.my-5.text-xs-center:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-  background:#1AAB8A;
+
+.first_cube {
+   -webkit-transform: translateZ(50px);
+   transform: translateZ(50px);
 }
-.headline.my-5.text-xs-center:hover:before,.headline.my-5.text-xs-center:hover:after{
-  width:0;
-  transition:800ms ease all;
+
+.second_cube {
+   -webkit-transform: rotateX(-90deg) translateZ(-50px);
+   transform: rotateX(-90deg) translateZ(-50px);
 }
+
+.second_cube h1{
+  font-size: 1000%;
+}
+
+.cube:hover {
+   -webkit-transform: rotateX(89deg);
+   transform: rotateX(89deg);
+}
+
+
+
+
 </style>

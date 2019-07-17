@@ -96,15 +96,19 @@ function calendar(datas,id){
 function mini(data,id) {
 var chart = new CanvasJS.Chart(id, {
   animationEnabled: true,
+  axisY:{
+  gridColor: "white"
+},
   data: [{
     yValueFormatString: "#,###",
     xValueFormatString: "#,###",
     type: "spline",
-    lineColor: "orange",
+    lineColor: "#6a60a9",
     dataPoints: data,
     lineThickness: 5,
      markerType:'circle',
-     markerColor:'red'
+     markerSize : 4,
+     markerColor:'#dedcee'
   }]
 
 });
@@ -195,9 +199,6 @@ export default {
 }; // default
 </script>
 <style>
-  h2{
-    color: rgb(35,200,178);
-  }
   .v-btn__content{
     font-size: 20px;
   }

@@ -11,6 +11,7 @@
         <div style="position:absolute; right:0px; bottom:0px">
           <form id="imgur">
             <div class="filebox">
+              <v-btn icon @click="MyFile"><v-icon>star</v-icon></v-btn>
               <label for="upload"><v-icon>cloud_upload</v-icon></label>
               <input type="file" id="upload" @change="onFileSelected" class="imgur" accept="image/*" data-max-size="5000"/>
               <v-btn icon @click="RandomFile"><v-icon>autorenew</v-icon></v-btn>
@@ -79,19 +80,47 @@ export default {
            console.log(this.$store.state.imgSrc);
            this.imgSrc = this.$store.state.imgSrc;
            FirebaseService.postBanner(this.$store.state.imgSrc);
+           this.$store.state.randomimg=false;
+           localStorage.setItem('randomimg', this.$store.state.randomimg)
          });
        }
 
      },
+     async MyFile(event){
+       this.banner = await FirebaseService.getBanner();
+       this.imgSrc= this.banner[0].img;
+       this.$store.state.imgSrc = this.banner[0].img;
+       this.$store.state.randomimg=false;
+       console.log("myfile");
+       console.log(this.banner[0].img);
+       console.log(this.$store.state.randomimg);
+       localStorage.setItem('randomimg', this.$store.state.randomimg)
+       //FirebaseService.postBanner(this.imgSrc);
+     },
      RandomFile(event){
-       this.$store.state.imgSrc = "https://source.unsplash.com/random";
-       this.imgSrc = this.$store.state.imgSrc;
-       FirebaseService.postBanner(this.imgSrc);
+       this.$store.state.randomimg=true;
+       this.imgSrc =  "https://source.unsplash.com/random";
+       this.$store.state.imgSrc=this.imgSrc;
+       console.log("random");
+       console.log(this.$store.state.imgSrc);
+       console.log(this.$store.state.randomimg);
+       //FirebaseService.postBanner(this.imgSrc);
+       localStorage.setItem('randomimg', this.$store.state.randomimg)
      },
      async getBannerImg() {
-        this.banner = await FirebaseService.getBanner()
-        this.$store.state.imgSrc = this.banner[0].img
-        console.log(this.banner[0].img)
+       if(localStorage.getItem("randomimg")==="false"){
+         this.banner = await FirebaseService.getBanner();
+         this.imgSrc= this.banner[0].img;
+         this.$store.state.imgSrc = this.banner[0].img;
+         console.log("my start");
+        console.log(this.imgSrc);
+          console.log(localStorage.getItem("randomimg"));
+      }else{
+        this.imgSrc =  "https://source.unsplash.com/random";
+        this.$store.state.imgSrc=this.imgSrc;
+        console.log("random start");
+        console.log(localStorage.getItem("randomimg"));
+      }
      }
    },
    mounted(){
@@ -135,4 +164,5 @@ export default {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
 </style>

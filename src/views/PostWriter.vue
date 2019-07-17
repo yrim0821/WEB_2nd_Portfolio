@@ -11,8 +11,8 @@
         <markdown-editor v-model="body" ref="markdownEditor"></markdown-editor>
 
         <v-flex  xs12 text-xs-center round my-5>
-          <v-btn color="info" v-on:click="postPost(title, body)">submit</v-btn>
-          <v-btn color="info" @click='$router.go(-1)'>back</v-btn>
+          <v-btn color="info" v-on:click="postPost(title, body)" class="movebtn button2">submit</v-btn>
+          <v-btn color="info" @click='$router.go(-1)' class="movebtn button3">back</v-btn>
         </v-flex>
       </form>
     </v-container>

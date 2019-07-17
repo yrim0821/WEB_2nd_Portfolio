@@ -10,6 +10,7 @@ export default new Vuex.Store({
     login: false,
     imgSrc: '',
     langage: 1,
-    inputimg: ''
+    inputimg: '',
+    randomimg:true,
   }
 })

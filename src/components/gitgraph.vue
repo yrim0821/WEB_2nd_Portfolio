@@ -246,10 +246,11 @@ export default {
   padding: auto;
   position: relative;
   height: 250px;
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
 }
 
+::-webkit-scrollbar-thumb {height: 50px; width: 50px; background: rgba(255,255,255,0);}
 .calendarBox {
   margin-left:10vw;
 }

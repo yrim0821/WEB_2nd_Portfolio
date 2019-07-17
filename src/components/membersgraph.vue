@@ -8,6 +8,7 @@
 
 const BASE_URL = "https://lab.ssafy.com/api/v4";
 var drawing = []
+var check = 0
 var person = {
   'Kim_yh': '영훈',
   'myccpb08': '유림',
@@ -31,20 +32,31 @@ function getRepos(id, token) {
   function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
       var howmany = response.headers["x-total"];
-      drawing.push({
-        label: person[id],
-        y: parseInt(howmany)
+      check = drawing.length;
+      if (check<5){
+        drawing.push({
+          label: person[id],
+          y: parseInt(howmany)
       })
-
-        draw(drawing)
-
+      }
+        draw(drawing);
     }
   }
   request(options, callback);
 }
 
 function draw(drawing) {
+  CanvasJS.addColorSet("greenShades",
+                [
+                "#BB96AB",
+                "#a9647d",
+                "#b08268",
+                "#9fb488",
+                "#59948e"
+                ]);
   var chart = new CanvasJS.Chart("chartContainer", {
+    colorSet : "greenShades",
+    backgroundColor : "rgba(0,0,0,0)",
     animationEnabled: true,
     theme: "light2",
     title: {
@@ -73,15 +85,17 @@ export default {
   }, // data 끝
 
   mounted() {
-    getRepos('myccpb08', '5yRamVkqs4Z4bq-G1roY')
-    getRepos('Kim_yh', 'N9RKhWdxvbGzn3oYEwVe')
-    getRepos('JIGyeongmin', 'yYcb5LEDsxxbN1PPxKEj')
-    getRepos('LeeSuKyeong', 'dCp7MpuwFQNzYrLBZix5')
-    getRepos('seok', 'xTftb51x12NTwFbxxAC5')
+
+    setInterval(()=>{
+      getRepos('myccpb08', '5yRamVkqs4Z4bq-G1roY')
+      getRepos('Kim_yh', 'N9RKhWdxvbGzn3oYEwVe')
+      getRepos('JIGyeongmin', 'yYcb5LEDsxxbN1PPxKEj')
+      getRepos('LeeSuKyeong', 'dCp7MpuwFQNzYrLBZix5')
+      getRepos('seok', 'xTftb51x12NTwFbxxAC5')},3000)
+
   },
 
   methods: {
-
   } // methods 끝
 }
 </script>
