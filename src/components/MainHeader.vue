@@ -9,15 +9,15 @@
           <v-toolbar-title>
             <router-link to="/">
               <v-img id="breadth_logo" :src="getImgUrl('breadth_logo.png')"/>
+              <v-img id="breadth_logo_night" :src="getImgUrl('night_breadth_logo_hormony_shadow.png')"/>
             </router-link>
           </v-toolbar-title>
           <v-spacer></v-spacer>
-
-          <v-toolbar-items class="hidden-xs-only">
-
             <!-- audio -->
             <v-btn @click='bgm()'>:D</v-btn>
-                <audio id='bgm' autoplay loop><source src='bgm.wav' type='audio/wav'></audio>
+                <audio id='bgm' autoplay loop><source src='bgm.mp3' type='audio/mp3'></audio>
+                  <input class="l" type="checkbox">
+                  <v-toolbar-items class="hidden-xs-only">
 
             <v-btn flat>
               <router-link to="/portfolio">Portfolio</router-link>
@@ -160,6 +160,7 @@
 </template>
 
 <script>
+import $ from 'jquery'
 import FirebaseService from '@/services/FirebaseService'
 import firebase from 'firebase/app'
 
@@ -208,12 +209,8 @@ export default {
       if(name === 'Microsoft Internet Explorer' || agent.indexOf('trident') > -1 || agent.indexOf('edge/') > -1) {
         window.external.AddFavorite(url, title);
       }
-      else if(agent.indexOf('safari') > -1) { // Chrome or Safari
-        if(agent.indexOf('chrome') > -1) { // Chrome
+      else if(agent.indexOf('safari') > -1||agent.indexOf('chrome') > -1) { // Chrome
           alert("Ctrl+D키를 누르시면 즐겨찾기에 추가하실 수 있습니다.");
-        }else{
-          alert("Ctrl+D키를 누르시면 즐겨찾기에 추가하실 수 있습니다.");
-        }
       }
       else if(agent.indexOf('firefox') > -1) { // Firefox
         alert("Ctrl+D키를 누르시면 즐겨찾기에 추가하실 수 있습니다.");
@@ -307,7 +304,7 @@ export default {
   },
   mounted(){
     var cBgm = document.getElementById("bgm");
-    cBgm.autoplay();
+    cBgm.play();
     this.audioFlag=false;
     if(localStorage.getItem("user")!=null && localStorage.getItem("user")!=''){
       this.$store.state.user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -315,6 +312,16 @@ export default {
     }
   }
 }
+$(document).ready(function() {
+$('.l').click(function() {
+  $('#header').toggleClass('night');
+  $('#app').toggleClass('night');
+  $('#header a').toggleClass('night');
+  $('#breadth_logo').toggleClass('night');
+  $('#breadth_logo_night').toggleClass('night');
+  //console.log(this.night);
+});
+});
 </script>
 
 
@@ -325,14 +332,26 @@ export default {
 
 #breadth_logo{
   width: 140px;
+ display: block;
 }
-
+#breadth_logo.night{
+display: none;
+}
+#breadth_logo_night{
+width: 140px;
+display: none;
+}
+#breadth_logo_night.night{
+display: block;
+}
 #header{
   position: fixed;
   z-index: 6;
   background-color: white;
   width:100%;
-}
+
+}.night
+{ background: #333!important; }
 
 a{
   text-decoration: none;
@@ -399,4 +418,67 @@ a{
   30% { transform: scaleX(1); }
   40% { transform: scaleX(0); }
 }
+
+.l {
+   background-color: rgba(0,0,0,0.7);
+   border-radius: 0.75em;
+   box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.3) inset;
+   color: #fdea7b;
+   display: inline-flex;
+   align-items: center;
+   margin: auto;
+   padding: 0.15em;
+   width: 3em;
+   height: 1.5em;
+   transition: background-color 0.1s 0.3s ease-out, box-shadow 0.1s 0.3s ease-out;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+}
+.l:before, .l:after {
+   content: "";
+   display: block;
+}
+.l:before {
+   background-color: #d7d7d7;
+   border-radius: 50%;
+   width: 1.2em;
+   height: 1.2em;
+   transition: background-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
+   z-index: 1;
+}
+.l:after {
+   background:
+      linear-gradient(transparent 50%, rgba(0,0,0,0.15) 0) 0 50% / 50% 100%,
+      repeating-linear-gradient(90deg,#bbb 0,#bbb,#bbb 20%,#999 20%,#999 40%) 0 50% / 50% 100%,
+      radial-gradient(circle at 50% 50%,#888 25%, transparent 26%);
+   background-repeat: no-repeat;
+   border: 0.25em solid transparent;
+   border-left: 0.4em solid #d8d8d8;
+   border-right: 0 solid transparent;
+   transition: border-left-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
+   transform: translateX(-22.5%);
+   transform-origin: 25% 50%;
+   width: 1.2em;
+   height: 1em;
+}
+/* Checked */
+.l:checked {
+   background-color: rgba(0,0,0,0.45);
+   box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.1) inset;
+}
+.l:checked:before {
+   background-color: currentColor;
+   transform: translateX(125%)
+}
+.l:checked:after {
+   border-left-color: currentColor;
+   transform: translateX(-2.5%) rotateY(180deg);
+}
+/* Other States */
+.l:focus {
+   /* Usually an anti-A11Y practice but set to remove an annoyance just for this demo */
+   outline: 0;
+}
+
 </style>

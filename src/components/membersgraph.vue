@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+  <div id="chartContainer" style="height: 350px; width: 100%;"></div>
 </div>
 </template>
 
@@ -63,8 +63,7 @@ function draw(drawing) {
       text: "GitLab/Contribution"
     },
     axisY: {
-      title: "Contribution",
-      includeZero: false
+      includeZero: true
     },
     data: [{
       type: "column",
