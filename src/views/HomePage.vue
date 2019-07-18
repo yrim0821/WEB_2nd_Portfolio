@@ -66,6 +66,7 @@
           <router-link to="/post">
             <h2 class="notranslate">Post</h2>
             <hr>
+            <div style="margin-top:40px"></div>
           </router-link>
           <PostList :column="$mq==='mobile'?1:2"></PostList>
         </v-flex>
@@ -76,8 +77,10 @@
       <!-- Github -->
       <v-layout my-5>
         <v-flex xs12>
-          <h2 class="notranslate"><span style="font-size:25pt;">Project</span>
-          </h2>
+          <h2 class="notranslate"><span style="font-size:25pt;">Project</span></h2>
+          <hr>
+
+          <div style="margin-top:40px"></div>
           <v-layout column v-if="$mq==='mobile'" >
             <v-flex xs12>
               <RepositoryList class="notranslate"></RepositoryList>
@@ -112,7 +115,7 @@
         </v-layout>
       </div>
 
-      <div style="margin-top:150px"></div>
+      <div style="margin-top:80px"></div>
 
     </v-container>
   </div>
@@ -181,7 +184,8 @@ h2{
   color: black;
 }
 hr{
-  border-color: RGB(155, 155, 155, 0.5);
+  border: solid 1px RGB(155, 155, 155, 0.2);
+
 }
 
 .aboutMe.mobile{
@@ -200,7 +204,6 @@ hr{
    margin: 0 auto;
    height: 100px;
   text-transform: uppercase;
-   font-family: sans-serif;
 }
 
 .cube {

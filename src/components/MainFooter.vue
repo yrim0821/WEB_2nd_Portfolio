@@ -1,11 +1,11 @@
 <template>
   <div class="notranslate">
-    <v-footer dark id="footcolor" height="auto" color="indigo">
+    <v-footer dark class="footcolor" height="auto" color="indigo">
       <v-layout justify-center row wrap>
         <!--weather-->
         <v-layout column style="z-index: 2;  opacity: 0.8;">
           <v-flex xs12>
-            <a id="footcolor" class="weatherwidget-io" href="https://forecast7.com/en/36d12128d34/gumi-si/" data-label_1="GUMI" data-label_2="WEATHER" data-theme="weather_one" >GUMI WEATHER</a>
+            <a class="weatherwidget-io footcolor" href="https://forecast7.com/en/36d12128d34/gumi-si/" data-label_1="GUMI" data-label_2="WEATHER" data-theme="weather_one" >GUMI WEATHER</a>
           </v-flex>
 
           <v-dialog v-model="dialog" width="100%">
@@ -20,7 +20,7 @@
               <div class="slide" style="background:black;">
                 <div class="action" style="top:5%;left:5%">
                   <div class="text">PRODUCT <br> BY </div>
-                  <div class="action"><span class="blip text">HARMONY</span></div>
+                  <div class="action"><span class="blip text footcolor">HARMONY</span></div>
                 </div>
               </div>
 
@@ -28,7 +28,7 @@
               <div class="slide" style="background-image:url(https://i.imgur.com/Pk1Cx1N.jpg);">
                 <div class="text">YEONGHOON KIM</div>
                 <div class="action">
-                  <span class="blip"><a href="http://www.naver.com"><font size="50px">Click me</font></a></span>
+                  <span class="blip"><a href="https://lab.ssafy.com/Kim_yh" target="_blank"><font size="50px">Click me</font></a></span>
                   <span class="action-text"></span>
                 </div>
               </div>
@@ -36,28 +36,28 @@
               <div class="slide" style="background-image: url(https://i.imgur.com/eFcIgEK.jpg)">
                 <div class="text">YURIM KIM</div>
                 <div class="action">
-                  <span class="blip"><a href="http://www.naver.com"><font size="50px">Click me</font></a></span>
+                  <span class="blip"><a href="https://lab.ssafy.com/myccpb08" target="_blank"><font size="50px">Click me</font></a></span>
                   <span class="action-text"></span>
                 </div>
               </div>
               <div class="slide" style="background-image: url(https://i.imgur.com/KdCfKKg.png)">
                 <div class="text">SUKYEONG LEE</div>
                 <div class="action">
-                  <span class="blip"><a href="http://www.naver.com"><font size="50px">Click me</font></a></span>
+                  <span class="blip"><a href="https://lab.ssafy.com/LeeSuKyeong" target="_blank"><font size="50px">Click me</font></a></span>
                   <span class="action-text"></span>
                 </div>
               </div>
               <div class="slide" style="background-image:url(https://i.imgur.com/7RugBUj.png)">
                 <div class="text">JUYEON SEOK</div>
                 <div class="action">
-                  <span class="blip"><a href="http://www.naver.com"><font size="50px">Click me</font></a></span>
+                  <span class="blip"><a href="https://lab.ssafy.com/seok" target="_blank"><font size="50px">Click me</font></a></span>
                   <span class="action-text"></span>
                 </div>
               </div>
               <div class="slide" style="background-image: url(https://i.imgur.com/Xc0uYrK.png)">
                 <div class="text" style="color:gray">GYEONGMIN JI</div>
                 <div class="action">
-                  <span class="blip"><a href="http://www.naver.com"><font size="50px">Click me</font></a></span>
+                  <span class="blip"><a href="https://lab.ssafy.com/JIGyeongmin" target="_blank"><font size="50px">Click me</font></a></span>
                   <span class="action-text"></span>
                 </div>
               </div>
@@ -99,14 +99,13 @@ export default {
   color: white!important;
   font-size: 2vw;
 }
-#footcolor{
+.footcolor{
   z-index: 1;
   background: linear-gradient(45deg, rgba(18,194,233,1) 0%, rgba(196,113,237,1) 46%, rgba(246,79,89,1) 100%);
    background-size: 400% 400%;
    -webkit-animation: Gradient 5s ease infinite;
    -moz-animation: Gradient 5s ease infinite;
    animation: Gradient 5s ease infinite;
-
 }
 
 html, body {
@@ -128,7 +127,6 @@ html, body {
   position: absolute;
   left: 5%;
   top: 0;
-  font-family: Arial Black, Arial, sans-serif;
   font-size: 50px;
   font-style: italic;
   font-weight: 700;
@@ -141,12 +139,9 @@ html, body {
   position: absolute;
   bottom: 5%;
   left: 60%;
-
-  font-family: Arial Black, Arial, sans-serif;
   font-size: 50px;
   font-style: italic;
   font-weight: 700;
-
   white-space: nowrap;
   color: #fff;
   text-transform: uppercase;

@@ -1,6 +1,6 @@
 <template>
   <div class="notranslate">
-    <v-parallax :src="this.$store.state.imgSrc" aspect-ratio="16/4" height="720">
+    <v-img :src="this.$store.state.imgSrc" aspect-ratio="16/4" height="720">
       <v-layout align-center justify-center row fill-height>
         <v-flex text-xs-center>
           <span class="text-shadow display-2 font-weight-light">
@@ -20,7 +20,7 @@
         </div>
 
       </v-layout>
-    </v-parallax>
+    </v-img>
   </div>
 </template>
 

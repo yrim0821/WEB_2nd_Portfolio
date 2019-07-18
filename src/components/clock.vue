@@ -95,7 +95,6 @@ export default{
   color: #fff;
   transition: .5s;
   text-align: center;
-  font-family: Oxygen;
 }
 .wrapper{
   margin-bottom: 50px;

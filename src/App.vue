@@ -1,13 +1,16 @@
 <template>
   <v-app>
+    <div id="contall" :class="{night : this.$store.state.night}">
     <MainHeader/>
     <v-content>
       <router-view/>
     </v-content>
+
     <back-to-top bottom="20px" right="10px">
       <v-btn flat icon type="button" class="btn btn-info btn-to-top notranslate"><v-icon>keyboard_arrow_up</v-icon></v-btn>
     </back-to-top>
     <MainFooter/>
+  </div>
   </v-app>
 </template>
 
@@ -17,9 +20,9 @@ import MainHeader from './components/MainHeader'
 import MainFooter from './components/MainFooter'
 import Vue from 'vue'
 import BackToTop from 'vue-backtotop'
+
 import $ from 'jquery'
 Vue.use(BackToTop)
-
 var agent = navigator.userAgent.toLowerCase();
 var name = navigator.appName;
 
@@ -40,15 +43,16 @@ export default {
   store,
   data() {
     return {
-      //
+      night: false,
     }
   },
   components: {
     'MainHeader' : MainHeader,
     'MainFooter' : MainFooter,
-    BackToTop
+    BackToTop,
   }
 }
+
 </script>
 <style>
 @font-face {
@@ -84,20 +88,12 @@ export default {
        -moz-animation: Gradient 15s ease infinite;
        animation: Gradient 15s ease infinite;
 }
-#app.night
+#contall{
+  color: black;
+}
+#contall.night
 { background: #333!important;
 color: white;
-}
-#header a.night
-{
-  color: #fff!important;
-  animation: flashText .5s ease-out alternate infinite;
-}
-@keyframes flashText {
-  to {
-    text-shadow: 5px 5px 5px rgba(255, 255, 255, .50);
-    opacity: 0.1;
-  }
 }
 @-webkit-keyframes Gradient {
    0% {

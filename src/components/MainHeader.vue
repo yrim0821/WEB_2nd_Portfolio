@@ -2,30 +2,27 @@
   <div class="notranslate">
     <v-app style="position:absolute">
       <div class="toolbar">
-        <v-toolbar id="header">
+        <v-toolbar id="header" :class="{night : night}">
           <v-toolbar-side-icon @click.stop="sideNav = !sideNav" class="hidden-sm-and-up">
             <v-icon>menu</v-icon>
           </v-toolbar-side-icon>
           <v-toolbar-title>
             <router-link to="/">
-              <v-img id="breadth_logo" :src="getImgUrl('breadth_logo.png')"/>
-              <v-img id="breadth_logo_night" :src="getImgUrl('night_breadth_logo_hormony_shadow.png')"/>
+              <v-img id="breadth_logo" :class="{night : night}" :src="getImgUrl('breadth_logo.png')"/>
+              <v-img id="breadth_logo_night" :class="{night : night}" :src="getImgUrl('night_breadth_logo_hormony_shadow.png')"/>
             </router-link>
           </v-toolbar-title>
           <v-spacer></v-spacer>
-            <!-- audio -->
-            <v-btn @click='bgm()'>:D</v-btn>
-                <audio id='bgm' autoplay loop><source src='bgm.mp3' type='audio/mp3'></audio>
-                  <input class="l" type="checkbox">
-                  <v-toolbar-items class="hidden-xs-only">
 
+          <v-toolbar-items class="hidden-xs-only">
             <v-btn flat>
-              <router-link to="/portfolio">Portfolio</router-link>
+              <router-link to="/portfolio" :class="{night : night}">Portfolio</router-link>
             </v-btn>
             <v-btn flat>
-              <router-link to="/post">Post</router-link>
+              <router-link to="/post" :class="{night : night}">Post</router-link>
             </v-btn>
 
+            <!-- login SignUp Form -->
             <!-- login SignUp Form -->
             <v-dialog v-if="!$store.state.user" v-model="loginDialog" width="380">
               <template v-slot:activator="{ on }">
@@ -43,30 +40,30 @@
                       <v-text-field v-model="loginPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password" style="width:250px;"></v-text-field>
                     </div>
                     <div class="notranslate" style="width:150px; margin: 0 auto; margin-top: 20px; text-align:center">
-                      <v-btn flat icon round color="#20aa49" dark v-on:click="loginWithMail" style="width:25px;height:25px;"><v-icon size="20" class="mr-2">mail</v-icon></v-btn>
-                      <v-btn flat icon round color="#df4a31" dark v-on:click="loginWithGoogle" style="width:25px;height:25px;"><v-icon size="20" class="mr-2">fa-google</v-icon></v-btn>
-                      <v-btn flat icon round color="#4267B2" dark v-on:click="loginWithFacebook" style="width:25px;height:25px;"><v-icon size="20" class="mr-2">fa-facebook</v-icon></v-btn>
+                      <v-btn flat icon round color="#20aa49" dark v-on:click="loginWithMail" style="width:25px;height:25px; opacity: 0.75;"><v-img :src="getImgUrl('gmail_icon.png')" style="width:100%"></v-img></v-btn>
+                      <v-btn flat icon round color="#df4a31" dark v-on:click="loginWithGoogle" style="width:25px;height:25px; opacity: 0.75;"><v-img :src="getImgUrl('google_logo.png')" style="width:100%"></v-img></v-btn>
+                      <v-btn flat icon round color="#4267B2" dark v-on:click="loginWithFacebook" style="width:25px;height:25px; opacity: 0.75;"><v-img :src="getImgUrl('facebook_logo.png')" style="width:100%"></v-img></v-btn>
                       <br>
 
-                      <v-dialog class="notranslate" v-model="signupDialog" width="380">
-                        <template v-slot:activator="{ on }" >
+                      <v-dialog class="notranslate" v-model="signupDialog" width="385">
+                        <template v-slot:activator="{ on }">
                           <v-btn flat icon round dark v-on="on" style="height:35px; color:RGB(255,255,255,0.55)"><p style="margin-top: 20px; font-size:18px;">Sing Up</p></v-btn>
                         </template>
 
                         <v-card class="notranslate">
-                          <v-card-title class="headline" primary-title>Sign up</v-card-title>
+                          <v-card-title class="headline" style="color:RGB(255,255,255,0)" primary-title></v-card-title>
                           <v-card-text>
                             <form>
-                              <v-text-field v-model="signupEmail" label="Email" placeholder="이메일을 입력하세요."></v-text-field>
-                              <v-text-field v-model="signupPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password"></v-text-field>
+                              <v-text-field v-model="signupEmail" style="width:300px; margin: 0 auto; margin-top: 50px; text-align:center" label="Email" placeholder="이메일을 입력하세요."></v-text-field>
+                              <v-text-field v-model="signupPassword" style="width:300px; margin: 0 auto; text-align:center" label="Password" placeholder="비밀번호를 입력하세요." type="password"></v-text-field>
                             </form>
                           </v-card-text>
-                          <v-divider></v-divider>
+                          <v-divider style="width:300px; margin: 0 auto; text-align:center"></v-divider>
 
                           <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn flat v-on:click="signUp()">SignUp</v-btn>
-                            <v-btn flat @click="signupDialog = false">close</v-btn>
+                            <v-btn flat v-on:click="signUp()" style="height:35px; color:RGB(255,255,255,0.55)">Sign Up</v-btn>
+                            <v-btn flat @click="signupDialog = false" style="height:35px; color:RGB(255,255,255,0.55)">Close</v-btn>
                           </v-card-actions>
                         </v-card>
 
@@ -79,8 +76,22 @@
 
             </v-dialog>
 
-            <v-btn v-else flat v-on:click="logout"><router-link to="/login">logout</router-link></v-btn>
+            <v-btn v-else flat v-on:click="logout" :class="{night : night}"><router-link to="/login">logout</router-link></v-btn>
             <v-btn flat icon v-on:click="bookmarksite('ujj', 'http://ujj.com')"><v-icon width="25px">bookmark</v-icon></v-btn>
+
+
+            <!-- audio -->
+            <v-btn icon @click='bgm()'>
+              <v-icon v-if='audioFlag===true' >fa-play-circle</v-icon>
+              <v-icon v-else>fa-pause-circle</v-icon>
+            </v-btn>
+            <audio id="bgm" preload="auto" loop>
+              <source :src="bgmSrc" :type="bgmType"/>
+            </audio>
+            <input class="l" type="checkbox" @click='nightcheck()'/>
+
+
+
           </v-toolbar-items>
         </v-toolbar>
       </div>
@@ -130,22 +141,22 @@
                       <template v-slot:activator="{ on }">
                         <v-btn flat icon round dark v-on="on" style="height:25px; color:RGB(255,255,255,0.55)"><p style="font-size:15px;">Sing Up</p></v-btn>
                       </template>
-                        <v-card class="notranslate" id="mobile_login_form">
-                          <v-card-title class="headline" primary-title>Sign up</v-card-title>
-                          <v-card-text>
-                            <form>
-                              <v-text-field v-model="signupEmail" label="Email" placeholder="이메일을 입력하세요."></v-text-field>
-                              <v-text-field v-model="signupPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password"></v-text-field>
-                            </form>
-                          </v-card-text>
-                          <v-divider></v-divider>
+                      <v-card class="notranslate" id="mobile_login_form">
+                        <v-card-title class="headline" primary-title>Sign up</v-card-title>
+                        <v-card-text>
+                          <form>
+                            <v-text-field v-model="signupEmail" label="Email" placeholder="이메일을 입력하세요."></v-text-field>
+                            <v-text-field v-model="signupPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password"></v-text-field>
+                          </form>
+                        </v-card-text>
+                        <v-divider></v-divider>
 
-                          <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn flat v-on:click="signUp()">SignUp</v-btn>
-                            <v-btn flat @click="m_signupDialog = false">close</v-btn>
-                          </v-card-actions>
-                        </v-card>
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn flat v-on:click="signUp()">SignUp</v-btn>
+                          <v-btn flat @click="m_signupDialog = false">close</v-btn>
+                        </v-card-actions>
+                      </v-card>
                     </v-dialog>
                     <p style="margin-top: 10px; font-size:12px; color:RGB(255,255,255,0.65)">@provided by HARMONY @2019.07.10 @git:lab.ssafy.com</p>
                   </div>
@@ -168,7 +179,9 @@ export default {
   name: 'MainHeader',
   data () {
     return{
-      audioFlag:false,
+      bgmSrc:'bgm.wav',
+      bgmType:'audio/wav',
+      audioFlag:true,
       loginEmail: '',
       loginPassword: '',
       signupEmail: '',
@@ -180,6 +193,8 @@ export default {
       sideNav: false,
       user: '',
       accessToken: '',
+      night: false,
+
       menuItems: [
         { icon: 'home', title: 'home', link: '/' },
         { icon: 'portrait', title: 'Portfolio', link: '/portfolio' },
@@ -189,7 +204,7 @@ export default {
   },
   methods: {
     bgm(){
-    var cBgm = document.getElementById("bgm");
+      var cBgm = document.getElementById("bgm");
       if(this.audioFlag==true){
         cBgm.play();
         this.audioFlag=false;
@@ -210,7 +225,7 @@ export default {
         window.external.AddFavorite(url, title);
       }
       else if(agent.indexOf('safari') > -1||agent.indexOf('chrome') > -1) { // Chrome
-          alert("Ctrl+D키를 누르시면 즐겨찾기에 추가하실 수 있습니다.");
+        alert("Ctrl+D키를 누르시면 즐겨찾기에 추가하실 수 있습니다.");
       }
       else if(agent.indexOf('firefox') > -1) { // Firefox
         alert("Ctrl+D키를 누르시면 즐겨찾기에 추가하실 수 있습니다.");
@@ -300,28 +315,46 @@ export default {
       this.m_loginDialog = false;
       this.m_signupDialog = false;
       this.sideNav = false;
+    },
+    nightcheck(event){
+      this.night=!this.night;
+      this.$store.state.night=this.night;
+      if(this.$store.state.night){
+        this.$store.state.imgSrc = "https://media.giphy.com/media/xUA7bgufvQFiE9nHPy/giphy.gif";
+      }else{
+        this.$store.state.imgSrc = "https://source.unsplash.com/random";
+      }
+      this.changeBgm();
+    },
+    changeBgm(){
+      var cBgm = document.getElementById("bgm");
+      cBgm.pause();
+      if(this.$store.state.night){
+        this.bgmSrc='maple_remix.mp3';
+        this.bgmType='audio/mp3';
+      }else{
+        this.bgmSrc='bgm.wav';
+        this.bgmType='audio/wav';
+      }
+      cBgm.currentTime=0;
+      cBgm.load();
+      if(this.audioFlag==false){
+        cBgm.play();
+        this.audioFlag=false;
+      }else{
+        cBgm.pause();
+        this.audioFlag=true;
+      }
     }
   },
   mounted(){
-    var cBgm = document.getElementById("bgm");
-    cBgm.play();
-    this.audioFlag=false;
+
     if(localStorage.getItem("user")!=null && localStorage.getItem("user")!=''){
       this.$store.state.user = JSON.parse(localStorage.getItem("user") || "{}");
       this.$store.state.accessToken = localStorage.getItem('accessToken');
     }
   }
 }
-$(document).ready(function() {
-$('.l').click(function() {
-  $('#header').toggleClass('night');
-  $('#app').toggleClass('night');
-  $('#header a').toggleClass('night');
-  $('#breadth_logo').toggleClass('night');
-  $('#breadth_logo_night').toggleClass('night');
-  //console.log(this.night);
-});
-});
 </script>
 
 
@@ -332,17 +365,17 @@ $('.l').click(function() {
 
 #breadth_logo{
   width: 140px;
- display: block;
+  display: block;
 }
 #breadth_logo.night{
-display: none;
+  display: none;
 }
 #breadth_logo_night{
-width: 140px;
-display: none;
+  width: 140px;
+  display: none;
 }
 #breadth_logo_night.night{
-display: block;
+  display: block;
 }
 #header{
   position: fixed;
@@ -350,135 +383,90 @@ display: block;
   background-color: white;
   width:100%;
 
-}.night
-{ background: #333!important; }
+  }.night
+  { background: #333!important; }
 
-a{
-  text-decoration: none;
-  font-size: 20px;
-}
+  a{
+    text-decoration: none;
+    font-size: 20px;
+  }
 
-#header a{
-  color: #555 !important;
-}
+  #header a{
+    color: #555 !important;
+  }
+  #header a.night
+  {
+    color: #fff!important;
+    animation: flashText .5s ease-out alternate infinite;
+  }
+  @keyframes flashText {
+    to {
+      text-shadow: 5px 5px 5px rgba(255, 255, 255, .50);
+      opacity: 0.1;
+    }
+  }
 
-#header a:before {
-  content: '';
-  border-bottom: solid 1px #d9534f;
-  position: absolute;
-  bottom: 0; left: 10%;
-  width: 0;
-  -webkit-transform: scale(0);
-     -moz-transform: scale(0);
-      -ms-transform: scale(0);
-       -o-transform: scale(0);
-          transform: scale(0);
-}
 
-#header a:hover:before {
-  border-bottom: solid thin #d9534f;
-  width: 90%;
-  -webkit-animation: heartbeat-x 1.7s infinite ease-in;
-          animation: heartbeat-x 1.7s infinite ease-in;
-}
+  .l {
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 0.75em;
+    box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.3) inset;
+    color: #fdea7b;
+    display: inline-flex;
+    align-items: center;
+    margin: auto;
+    padding: 0.15em;
+    width: 3em;
+    height: 1.5em;
+    transition: background-color 0.1s 0.3s ease-out, box-shadow 0.1s 0.3s ease-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  .l:before, .l:after {
+    content: "";
+    display: block;
+  }
+  .l:before {
+    background-color: #d7d7d7;
+    border-radius: 50%;
+    width: 1.2em;
+    height: 1.2em;
+    transition: background-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
+    z-index: 1;
+  }
+  .l:after {
+    background:
+    linear-gradient(transparent 50%, rgba(0,0,0,0.15) 0) 0 50% / 50% 100%,
+    repeating-linear-gradient(90deg,#bbb 0,#bbb,#bbb 20%,#999 20%,#999 40%) 0 50% / 50% 100%,
+    radial-gradient(circle at 50% 50%,#888 25%, transparent 26%);
+    background-repeat: no-repeat;
+    border: 0.25em solid transparent;
+    border-left: 0.4em solid #d8d8d8;
+    border-right: 0 solid transparent;
+    transition: border-left-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
+    transform: translateX(-22.5%);
+    transform-origin: 25% 50%;
+    width: 1.2em;
+    height: 1em;
+  }
+  /* Checked */
+  .l:checked {
+    background-color: rgba(0,0,0,0.45);
+    box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.1) inset;
+  }
+  .l:checked:before {
+    background-color: currentColor;
+    transform: translateX(125%)
+  }
+  .l:checked:after {
+    border-left-color: currentColor;
+    transform: translateX(-2.5%) rotateY(180deg);
+  }
+  /* Other States */
+  .l:focus {
+    /* Usually an anti-A11Y practice but set to remove an annoyance just for this demo */
+    outline: 0;
+  }
 
-#header a:hover {
-  -webkit-animation: heartbeat 1.7s infinite ease-in;
-          animation: heartbeat 1.7s infinite ease-in;
-}
-
-@-webkit-keyframes heartbeat {
-  0% { -webkit-transform: scale(1); }
-  10% { -webkit-transform: scale(1.1); }
-  20% { -webkit-transform: scale(1); }
-  30% { -webkit-transform: scale(1.1); }
-  40% { -webkit-transform: scale(1); }
-}
-
-@-webkit-keyframes heartbeat-x {
-  0% { -webkit-transform: scaleX(0); }
-  10% { -webkit-transform: scaleX(1); }
-  20% { -webkit-transform: scaleX(0); }
-  30% { -webkit-transform: scaleX(1); }
-  40% { -webkit-transform: scaleX(0); }
-}
-
-@keyframes heartbeat {
-  0% { transform: scale(1); }
-  10% { transform: scale(1.1); }
-  20% { transform: scale(1); }
-  30% { transform: scale(1.1); }
-  40% { transform: scale(1); }
-}
-
-@keyframes heartbeat-x {
-  0% { transform: scaleX(0); }
-  10% { transform: scaleX(1); }
-  20% { transform: scaleX(0); }
-  30% { transform: scaleX(1); }
-  40% { transform: scaleX(0); }
-}
-
-.l {
-   background-color: rgba(0,0,0,0.7);
-   border-radius: 0.75em;
-   box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.3) inset;
-   color: #fdea7b;
-   display: inline-flex;
-   align-items: center;
-   margin: auto;
-   padding: 0.15em;
-   width: 3em;
-   height: 1.5em;
-   transition: background-color 0.1s 0.3s ease-out, box-shadow 0.1s 0.3s ease-out;
-   -webkit-appearance: none;
-   -moz-appearance: none;
-   appearance: none;
-}
-.l:before, .l:after {
-   content: "";
-   display: block;
-}
-.l:before {
-   background-color: #d7d7d7;
-   border-radius: 50%;
-   width: 1.2em;
-   height: 1.2em;
-   transition: background-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
-   z-index: 1;
-}
-.l:after {
-   background:
-      linear-gradient(transparent 50%, rgba(0,0,0,0.15) 0) 0 50% / 50% 100%,
-      repeating-linear-gradient(90deg,#bbb 0,#bbb,#bbb 20%,#999 20%,#999 40%) 0 50% / 50% 100%,
-      radial-gradient(circle at 50% 50%,#888 25%, transparent 26%);
-   background-repeat: no-repeat;
-   border: 0.25em solid transparent;
-   border-left: 0.4em solid #d8d8d8;
-   border-right: 0 solid transparent;
-   transition: border-left-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
-   transform: translateX(-22.5%);
-   transform-origin: 25% 50%;
-   width: 1.2em;
-   height: 1em;
-}
-/* Checked */
-.l:checked {
-   background-color: rgba(0,0,0,0.45);
-   box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.1) inset;
-}
-.l:checked:before {
-   background-color: currentColor;
-   transform: translateX(125%)
-}
-.l:checked:after {
-   border-left-color: currentColor;
-   transform: translateX(-2.5%) rotateY(180deg);
-}
-/* Other States */
-.l:focus {
-   /* Usually an anti-A11Y practice but set to remove an annoyance just for this demo */
-   outline: 0;
-}
-
-</style>
+  </style>

@@ -1,37 +1,47 @@
 <template>
   <div style="margin-top: 50px;">
     <div id="testcontainer">
+
+    <v-btn-toggle>
+    <v-btn v-on:click="getCommits()" class="btn2">프로젝트</v-btn>
+    <v-btn v-on:click="getRepos('myccpb08','5yRamVkqs4Z4bq-G1roY')" class="btn2">유림</v-btn>
+    <v-btn v-on:click="getRepos('Kim_yh', 'N9RKhWdxvbGzn3oYEwVe')" class="btn2">영훈</v-btn>
+    <v-btn v-on:click="getRepos('JIGyeongmin', 'yYcb5LEDsxxbN1PPxKEj')" class="btn2">경민</v-btn>
+    <v-btn v-on:click="getRepos('LeeSuKyeong','dCp7MpuwFQNzYrLBZix5')" class="btn2">수경</v-btn>
+    <v-btn v-on:click="getRepos('seok','xTftb51x12NTwFbxxAC5')" class="btn2">주연</v-btn>
+  </v-btn-toggle>
+
+    <div style="margin-top:50px;"></div>
+
     <div v-if='!valueA' class="calendarContainer">
-      <div class="calendarBox" id="calendar_basic"></div>
+      <div class="calendarBox notranslate" id="calendar_basic"></div>
     </div>
 
     <div v-if='valueA'>
       <v-timeline>
         <v-timeline-item v-for="(data,i) in tlInfo" :key='i' :color="data.color" small>
           <template v-slot:opposite>
-            <span :class="`headline font-weight-bold ${data.color}--text`">{{data.dayA}}</span>
+            <span :class="`headline font-weight-bold ${data.color}--text`"><font>{{data.dayA}}</font></span>
           </template>
           <div v-if='i%2===0' class="py-3 text-lg-right">
-            <h2 :class="`headline font-weight-light mb-3 ${data.color}--text`">{{data.personA}}</h2>
+            <h2 :class="`headline font-weight-light mb-3 ${data.color}--text`"><font>{{data.personA}}</font></h2>
             <div>
               {{data.activityA}}
             </div>
           </div>
           <div v-else class="py-3 text-lg-left">
-            <h2 :class="`headline font-weight-light mb-3 ${data.color}--text`">{{data.personA}}</h2>
+            <h2 :class="`headline font-weight-light mb-3 ${data.color}--text`"><font>{{data.personA}}</font></h2>
             <div>
               {{data.activityA}}
             </div>
           </div>
         </v-timeline-item>
       </v-timeline>
-      <v-btn class="morebtn" href="https://lab.ssafy.com/Kim_yh/webmobile-sub2/network/master"><v-icon size="25">fa-plus</v-icon>&nbsp; 더 보기</v-btn>    </div>
-    <v-btn fab outline large v-on:click="getCommits()" class="btn1">프로젝트</v-btn>
-    <v-btn fab outline v-on:click="getRepos('myccpb08','5yRamVkqs4Z4bq-G1roY')" class="btn2">유림</v-btn>
-    <v-btn fab outline v-on:click="getRepos('Kim_yh', 'N9RKhWdxvbGzn3oYEwVe')" class="btn2">영훈</v-btn>
-    <v-btn fab outline v-on:click="getRepos('JIGyeongmin', 'yYcb5LEDsxxbN1PPxKEj')" class="btn2">경민</v-btn>
-    <v-btn fab outline v-on:click="getRepos('LeeSuKyeong','dCp7MpuwFQNzYrLBZix5')" class="btn2">수경</v-btn>
-    <v-btn fab outline v-on:click="getRepos('seok','xTftb51x12NTwFbxxAC5')" class="btn2">주연</v-btn>
+      <div style="margin-top:80px"></div>
+      <v-btn class="movebtn button1" href="https://lab.ssafy.com/Kim_yh/webmobile-sub2/network/master" target="_blank"><v-icon size="25" class="mr-2">fa-plus</v-icon> VIEW MORE</v-btn>
+    </div>
+
+
   </div>
 </div>
 </template>
@@ -233,14 +243,14 @@ export default {
 
 <style>
 .btn1{
-  color: #FF8224 !important;
+  color: black !important;
   font-size: 25px;
 }
 .btn2{
-  color: #F2CB61 !important;
+  color: grey !important;
   font-size: 20px;
 }
-@font-face { font-family: 'BBTreeGR'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGR.woff') format('woff'); font-weight: normal; font-style: normal; }
+
 .calendarContainer {
   padding: auto;
   position: relative;
@@ -248,6 +258,9 @@ export default {
   overflow-x: auto;
   overflow-y: hidden;
 }
+
+
+
 
 ::-webkit-scrollbar-thumb {height: 50px; width: 50px; background: rgba(255,255,255,0);}
 .calendarBox {

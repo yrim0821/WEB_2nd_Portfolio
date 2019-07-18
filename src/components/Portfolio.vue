@@ -4,7 +4,7 @@
     </v-img>
     <v-card-title primary-title>
       <div>
-        <div class="headline" v-line-clamp:20="1">{{title}}</div>
+        <div class="headline" v-line-clamp:20="1"><font>{{title}}</font></div>
         <span class="grey--text" v-line-clamp:20="4">{{body}}</span>
       </div>
     </v-card-title>
