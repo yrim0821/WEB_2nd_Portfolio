@@ -6,11 +6,11 @@
         <div id="bannerTitle" style="line-height:1.2em; font-size:7rem;" slot="text">Orchestrate Life.</div>
       </ImgBanner>
     </div>
-
+<canvas id="canvas" v-show="this.$store.state.night" style="position:absolute; width:100%; height:85%; z-index:0"></canvas>
     <v-container>
       <!-- About Me -->
       <v-layout my-5>
-        <v-flex class="aboutMe" :class="$mq" style="z-index:2" xs8>
+        <v-flex class="aboutMe" :class="$mq" style="z-index:1" xs8>
           <h2 class="notranslate" :class="{night : this.$store.state.night}">
             <span style="font-size:25pt;">About Us</span>
 
@@ -50,7 +50,7 @@
 
       <!-- Portfolio -->
       <v-layout my-5>
-        <v-flex xs12>
+        <v-flex style="z-index:1" xs12>
           <router-link to="/portfolio">
             <h2 class="notranslate":class="{night : this.$store.state.night}">Portfolio</h2>
             <hr>
@@ -63,7 +63,7 @@
 
       <!-- Post -->
       <v-layout my-5>
-        <v-flex xs12>
+        <v-flex style="z-index:1" xs12>
           <router-link to="/post">
             <h2 class="notranslate" :class="{night : this.$store.state.night}">Post</h2>
             <hr>
@@ -77,7 +77,7 @@
 
       <!-- Github -->
       <v-layout my-5>
-        <v-flex xs12>
+        <v-flex style="z-index:1" xs12>
           <h2 class="notranslate" :class="{night : this.$store.state.night}"><span style="font-size:25pt;">Project</span></h2>
           <hr>
 
@@ -106,7 +106,7 @@
       <!-- Graph -->
       <div class='notranslate'>
         <v-layout my-5 v-show="$mq==='mobile' ? false : true">
-          <v-flex xs12>
+          <v-flex style="z-index:1" xs12>
             <h2 class="notranslate" :class="{night : this.$store.state.night}">
               <span style="font-size:25pt;">Graph</span>
             </h2>

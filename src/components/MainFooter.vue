@@ -11,7 +11,7 @@
           <v-dialog v-model="dialog" width="100%">
             <template v-slot:activator="{ on }">
               <v-btn flat v-on="on">
-                <router-link to="" id="foottitle">@provided by HARMONY @2019.07.10 @git:lab.ssafy.com</router-link>
+                <router-link to="" id="foottitle">@provided by HARMONY @2019.07.10 @git:https://lab.ssafy.com/Kim_yh/webmobile-sub2</router-link>
               </v-btn>
             </template>
 
