@@ -23,11 +23,10 @@
             </v-btn>
 
             <!-- login SignUp Form -->
-            <!-- login SignUp Form -->
             <v-dialog v-if="!$store.state.user" v-model="loginDialog" width="380">
               <template v-slot:activator="{ on }">
                 <v-btn flat v-on="on">
-                  <router-link to="">login</router-link>
+                  <router-link to="" :class="{night : night}">login</router-link>
                 </v-btn>
               </template>
 
@@ -78,7 +77,11 @@
 
             <v-btn v-else flat v-on:click="logout" :class="{night : night}"><router-link to="/login">logout</router-link></v-btn>
             <v-btn flat icon v-on:click="bookmarksite('ujj', 'http://ujj.com')"><v-icon width="25px">bookmark</v-icon></v-btn>
-
+            <v-dialog v-model="bookmarkDialog" width="380">
+                    <v-card style="background-color: rgba(0,0,0,0);">
+                      <v-img :src="getImgUrl('merong.png')" style="width:100%"></v-img>
+                    </v-card>
+                  </v-dialog>
 
             <!-- audio -->
             <v-btn icon @click='bgm()'>
@@ -133,30 +136,33 @@
                     <v-text-field v-model="loginPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password" style="width:158px;"></v-text-field>
                   </div>
                   <div class="notranslate" style="width:150px; margin: 0 auto; text-align:center">
-                    <v-btn flat icon round color="#20aa42" dark v-on:click="loginWithMail" style="width:25px;height:25px;"><v-icon size="20" class="mr-2">mail</v-icon></v-btn>
-                    <v-btn flat icon round color="#df4a31" dark v-on:click="loginWithGoogle" style="width:25px;height:25px;"><v-icon size="20" class="mr-2">fa-google</v-icon></v-btn>
-                    <v-btn flat icon round color="#4267B2" dark v-on:click="loginWithFacebook" style="width:25px;height:25px;"><v-icon size="20" class="mr-2">fa-facebook</v-icon></v-btn>
+                    <v-btn flat icon round color="#20aa49" dark v-on:click="loginWithMail" style="width:25px;height:25px; opacity: 0.75;"><v-img :src="getImgUrl('gmail_icon.png')" style="width:100%"></v-img></v-btn>
+                    <v-btn flat icon round color="#df4a31" dark v-on:click="loginWithGoogle" style="width:25px;height:25px; opacity: 0.75;"><v-img :src="getImgUrl('google_logo.png')" style="width:100%"></v-img></v-btn>
+                    <v-btn flat icon round color="#4267B2" dark v-on:click="loginWithFacebook" style="width:25px;height:25px; opacity: 0.75;"><v-img :src="getImgUrl('facebook_logo.png')" style="width:100%"></v-img></v-btn>
                     <br>
-                    <v-dialog class="notranslate" v-model="m_signupDialog">
+
+                    <v-dialog class="notranslate" v-model="m_signupDialog" width="385">
                       <template v-slot:activator="{ on }">
-                        <v-btn flat icon round dark v-on="on" style="height:25px; color:RGB(255,255,255,0.55)"><p style="font-size:15px;">Sing Up</p></v-btn>
+                        <v-btn flat icon round dark v-on="on" style="height:35px; color:RGB(255,255,255,0.55)"><p style="margin-top: 20px; font-size:18px;">Sing Up</p></v-btn>
                       </template>
+
                       <v-card class="notranslate" id="mobile_login_form">
-                        <v-card-title class="headline" primary-title>Sign up</v-card-title>
+                        <v-card-title class="headline" style="color:RGB(255,255,255,0)" primary-title></v-card-title>
                         <v-card-text>
                           <form>
-                            <v-text-field v-model="signupEmail" label="Email" placeholder="이메일을 입력하세요."></v-text-field>
-                            <v-text-field v-model="signupPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password"></v-text-field>
+                            <v-text-field v-model="signupEmail" style="width:300px; margin: 0 auto; margin-top: 50px; text-align:center" label="Email" placeholder="이메일을 입력하세요."></v-text-field>
+                            <v-text-field v-model="signupPassword" style="width:300px; margin: 0 auto; text-align:center" label="Password" placeholder="비밀번호를 입력하세요." type="password"></v-text-field>
                           </form>
                         </v-card-text>
-                        <v-divider></v-divider>
+                        <v-divider style="width:300px; margin: 0 auto; text-align:center"></v-divider>
 
                         <v-card-actions>
                           <v-spacer></v-spacer>
-                          <v-btn flat v-on:click="signUp()">SignUp</v-btn>
-                          <v-btn flat @click="m_signupDialog = false">close</v-btn>
+                          <v-btn flat v-on:click="signUp()" style="height:35px; color:RGB(255,255,255,0.55)">Sign Up</v-btn>
+                          <v-btn flat @click="m_signupDialog = false" style="height:35px; color:RGB(255,255,255,0.55)">Close</v-btn>
                         </v-card-actions>
                       </v-card>
+
                     </v-dialog>
                     <p style="margin-top: 10px; font-size:12px; color:RGB(255,255,255,0.65)">@provided by HARMONY @2019.07.10 @git:lab.ssafy.com</p>
                   </div>
@@ -194,7 +200,8 @@ export default {
       user: '',
       accessToken: '',
       night: false,
-
+      bookmarkClick:0,
+            bookmarkDialog:false,
       menuItems: [
         { icon: 'home', title: 'home', link: '/' },
         { icon: 'portrait', title: 'Portfolio', link: '/portfolio' },
@@ -219,7 +226,14 @@ export default {
     bookmarksite(title, url) {
       var agent = navigator.userAgent.toLowerCase();
       var name = navigator.appName;
+      this.bookmarkClick+=1;
+           if(this.bookmarkClick==10){
 
+             this.bookmarkDialog=true;
+             alert("이런 귀한 곳에 누추하신 분이????");
+             this.bookmarkClick=0;
+             return;
+           }
       // MS 계열 브라우저를 구분  IE 11+, IE 11,Edge
       if(name === 'Microsoft Internet Explorer' || agent.indexOf('trident') > -1 || agent.indexOf('edge/') > -1) {
         window.external.AddFavorite(url, title);
@@ -249,6 +263,7 @@ export default {
         alert(this.$store.state.user.email + "님 로그인 되었습니다")
         this.closeDialog()
         this.$router.replace('/')
+        FirebaseService.addLog(this.$store.state.user.email,"login with mail")
       })
       .catch((error)=>{
         alert(error)
@@ -263,6 +278,7 @@ export default {
       alert(this.$store.state.user.email + "님 로그인 되었습니다")
       this.closeDialog()
       this.$router.replace('/')
+      FirebaseService.addLog(this.$store.state.user.email,"login with google")
     },
     async loginWithFacebook() {
       const result = await FirebaseService.loginWithFacebook()
@@ -273,6 +289,7 @@ export default {
       alert(this.$store.state.user.displayName + "님 로그인 되었습니다")
       this.closeDialog()
       this.$router.replace('/')
+      FirebaseService.addLog(this.$store.state.user.displayName,"login with facebook")
     },
     signUp(){
       firebase.auth().createUserWithEmailAndPassword(this.signupEmail, this.signupPassword)
@@ -296,6 +313,7 @@ export default {
       }
       else if(firebase.auth().currentUser){
         firebase.auth().signOut().then(() => {
+          FirebaseService.addLog(this.$store.state.user.email,"logout");
           alert(this.$store.state.user.email + "님 로그아웃 되었습니다.");
           this.$store.state.accessToken = '';
           this.$store.state.user = '';
@@ -384,7 +402,7 @@ export default {
   width:100%;
 
   }.night
-  { background: #333!important; }
+  { background: rgb(12,9,29)!important; }
 
   a{
     text-decoration: none;

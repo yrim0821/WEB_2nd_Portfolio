@@ -3,7 +3,7 @@
     <v-layout>
       <v-flex xs8>
         <!-- dialog 테스트 -->
-        <v-dialog v-model="dialog" width="500">
+        <v-dialog v-model="dialog" width="500px" height="300px;">
           <template v-slot:activator="{ on }">
                 <v-btn color="#555555" flat v-on="on" v-on:click="test(repos.owner.username)" style="font-size:20px">{{repos.owner.name}}<v-icon>bar_chart</v-icon></v-btn>
                 <a v-bind:href="repos.http_url_to_repo" target="_blank" style="position:absolute">
@@ -16,8 +16,18 @@
 
               <v-card-text>
 
+                  <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn
+                          color="primary"
+                          flat
+                          @click="dialog = false"
+                          >
+                          <v-icon style="color:white">close</v-icon>
+                        </v-btn>
+                      </v-card-actions>
                 <!-- 미니그래프 테스트 -->
-                <div :id="repos.owner.username" style="height: 250px; width: 90%;"></div>
+                <div :id="repos.owner.username" style="height: 250px; width: 90%;" v-if="!flags" ></div>
                 <!-- 미니그래프 테스트 끝 -->
                 <v-divider></v-divider>
                 <!-- <h4 class="mt-3">{{ repos.owner.name }}님 프로젝트 <v-icon> arrow_downward</v-icon> </h4> -->
@@ -100,29 +110,9 @@
                 </v-timeline>
               </v-card-text>
             </v-card>
-
-
-
-
-
-
-
           </div>
-
         </v-card-text>
 
-
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-          color="primary"
-          flat
-          @click="dialog = false"
-          >
-          닫기
-        </v-btn>
-      </v-card-actions>
     </v-img>
   </v-card>
 </v-dialog>
@@ -282,4 +272,16 @@ export default {
       .v-btn__content{
         font-size: 20px;
       }
+      .v-dialog{
+        height: 500px;
+        overflow: hidden;
+      }
+      .v-card{
+
+      }
+      .v-dialog::-webkit-scrollbar {
+
+display:none;
+
+}
       </style>

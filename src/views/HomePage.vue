@@ -6,11 +6,12 @@
         <div id="bannerTitle" style="line-height:1.2em; font-size:7rem;" slot="text">Orchestrate Life.</div>
       </ImgBanner>
     </div>
+
     <v-container>
       <!-- About Me -->
       <v-layout my-5>
-        <v-flex class="aboutMe" :class="$mq" xs8>
-          <h2 class="notranslate">
+        <v-flex class="aboutMe" :class="$mq" style="z-index:2" xs8>
+          <h2 class="notranslate" :class="{night : this.$store.state.night}">
             <span style="font-size:25pt;">About Us</span>
 
 
@@ -51,7 +52,7 @@
       <v-layout my-5>
         <v-flex xs12>
           <router-link to="/portfolio">
-            <h2 class="notranslate">Portfolio</h2>
+            <h2 class="notranslate":class="{night : this.$store.state.night}">Portfolio</h2>
             <hr>
             <PortfolioList :column="$mq==='mobile'?1:2"></PortfolioList>
           </router-link>
@@ -64,7 +65,7 @@
       <v-layout my-5>
         <v-flex xs12>
           <router-link to="/post">
-            <h2 class="notranslate">Post</h2>
+            <h2 class="notranslate" :class="{night : this.$store.state.night}">Post</h2>
             <hr>
             <div style="margin-top:40px"></div>
           </router-link>
@@ -77,7 +78,7 @@
       <!-- Github -->
       <v-layout my-5>
         <v-flex xs12>
-          <h2 class="notranslate"><span style="font-size:25pt;">Project</span></h2>
+          <h2 class="notranslate" :class="{night : this.$store.state.night}"><span style="font-size:25pt;">Project</span></h2>
           <hr>
 
           <div style="margin-top:40px"></div>
@@ -106,7 +107,7 @@
       <div class='notranslate'>
         <v-layout my-5 v-show="$mq==='mobile' ? false : true">
           <v-flex xs12>
-            <h2 class="notranslate">
+            <h2 class="notranslate" :class="{night : this.$store.state.night}">
               <span style="font-size:25pt;">Graph</span>
             </h2>
             <hr>
@@ -167,16 +168,6 @@ export default {
     this.$store.state.langage = localStorage.getItem('langage');
   }
 }
-!function(d,s,id){
-  var js,fjs=d.getElementsByTagName(s)[0];
-  if(!d.getElementById(id)){
-    js=d.createElement(s);
-    js.id=id;
-    js.src='https://weatherwidget.io/js/widget.min.js';
-    fjs.parentNode.insertBefore(js,fjs);
-  }
-}(document,'script','weatherwidget-io-js');
-
 </script>
 
 <style>
@@ -239,6 +230,10 @@ hr{
    transform: rotateX(89deg);
 }
 
+
+h2.night{
+  color: white;
+}
 
 
 

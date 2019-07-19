@@ -262,7 +262,11 @@ export default {
 
 
 
-::-webkit-scrollbar-thumb {height: 50px; width: 50px; background: rgba(255,255,255,0);}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  width: 50px;
+  background: rgba(255,255,255,0);
+}
 .calendarBox {
   margin-left:10vw;
 }

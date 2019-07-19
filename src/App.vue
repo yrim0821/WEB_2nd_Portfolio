@@ -2,6 +2,7 @@
   <v-app>
     <div id="contall" :class="{night : this.$store.state.night}">
     <MainHeader/>
+
     <v-content>
       <router-view/>
     </v-content>
@@ -92,9 +93,10 @@ export default {
   color: black;
 }
 #contall.night
-{ background: #333!important;
+{ background: rgb(12,9,29)!important;
 color: white;
 }
+
 @-webkit-keyframes Gradient {
    0% {
       background-position: 0% 50%

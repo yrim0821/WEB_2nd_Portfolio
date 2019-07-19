@@ -9,7 +9,7 @@
         <v-divider></v-divider>
       </v-flex>
       <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
-        <v-btn v-on:click="loadMorePosts" class="movebtn button2"><v-icon size="25" class="mr-2">fa-plus</v-icon>View more</v-btn>
+        <v-btn v-if="this.limits<=posts.length" v-on:click="loadMorePosts" class="movebtn button2"><v-icon size="25" class="mr-2">fa-plus</v-icon>View more</v-btn>
         <router-link to="/postwriter"><v-btn v-if="$store.state.user" class="movebtn button3">
         <v-icon size="25" class="mr-2 notranslate">create</v-icon>Write</v-btn></router-link>
       </v-flex>
@@ -44,8 +44,9 @@ export default {
     async postPost(title, body){
       await FirebaseService.postPost(title, body)
     },
-    async   loadMorePosts() {
-      }
+    loadMorePosts() {
+        this.limits = this.limits*2;
+    } 
   }
 }
 </script>

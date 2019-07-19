@@ -5,6 +5,8 @@ import 'firebase/auth'
 const POSTS = 'posts'
 const PORTFOLIOS = 'portfolios'
 const BANNER = 'banner'
+const USER = 'users'
+
 
 // Setup Firebase
 const config = {
@@ -100,6 +102,15 @@ export default {
      })
      .then(function(){
        console.log("update banner");
+     })
+   },
+   addLog(id,msg) {
+     return firestore.collection(USER).doc(id).collection("history").add({
+        created_at: firebase.firestore.FieldValue.serverTimestamp(),
+        msg:msg
+     })
+     .then(function(){
+       console.log("update log");
      })
    },
 
