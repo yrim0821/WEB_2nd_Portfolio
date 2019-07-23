@@ -137,8 +137,8 @@ function init(){
 
   // Click listener
   document.addEventListener("click", function (event) {
-      var x = event.clientX * 3.4,
-          y = event.clientY * 5;
+      var x = Math.random(1000)*10000,
+          y = Math.random(5000)*5000;
       cleanUpArray();
       initParticles(config.particleNumber, x, y);
   });

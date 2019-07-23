@@ -33,7 +33,7 @@
               <v-card>
                 <v-img :src="getImgUrl('login_form.png')" style="width:100%">
 
-                  <v-card-text style="margin-top:150px">
+                  <v-card-text style="margin-top:150px ">
                     <div class="notranslate" style="padding-left:50px; text-align:center;">
                       <v-text-field v-model="loginEmail" label="Email" placeholder="이메일을 입력하세요." style="width:250px;"></v-text-field>
                       <v-text-field v-model="loginPassword" label="Password" placeholder="비밀번호를 입력하세요." type="password" style="width:250px;"></v-text-field>
@@ -67,7 +67,7 @@
                         </v-card>
 
                       </v-dialog>
-                      <p style="margin-top: 20px; font-size:12px; color:RGB(255,255,255,0.65)">@provided by HARMONY @2019.07.10 @git:lab.ssafy.com</p>
+                      <p style="margin-top: 30px; font-size:12px; color:RGB(255,255,255,0.65)">@provided by HARMONY @2019.07.10 @git:lab.ssafy.com</p>
                     </div>
                   </v-card-text>
                 </v-img>
