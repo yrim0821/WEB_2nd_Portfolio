@@ -23,7 +23,7 @@
             </v-btn>
 
             <!-- login SignUp Form -->
-            <v-dialog v-if="!$store.state.user" v-model="loginDialog" width="380">
+            <v-dialog v-if="!$store.state.user" v-model="loginDialog">
               <template v-slot:activator="{ on }">
                 <v-btn flat v-on="on">
                   <router-link to="" :class="{night : night}">login</router-link>
@@ -31,7 +31,90 @@
               </template>
 
               <v-card>
-                <v-img :src="getImgUrl('login_form.png')" style="width:100%">
+                <section class="user">
+      <div class="user_options-container">
+        <div class="user_options-text">
+          <div class="user_options-unregistered">
+            <h2 class="user_unregistered-title">Don't have an account?</h2>
+            <p class="user_unregistered-text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste,
+              sunt expedita! Reiciendis ratione soluta tempora numquam!
+              Consequuntur.
+            </p>
+            <button class="user_unregistered-signup" id="signup-button">
+              Sign up
+            </button>
+          </div>
+
+          <div class="user_options-registered">
+            <h2 class="user_registered-title">Have an account?</h2>
+            <p class="user_registered-text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis in
+              laboriosam adipisci. Facilis laudantium adipisci illo!
+            </p>
+            <button class="user_registered-login" id="login-button">
+              Login
+            </button>
+          </div>
+        </div>
+
+        <div class="user_options-forms" id="user_options-forms">
+          <div class="user_forms-login">
+            <h2 class="forms_title">Login</h2>
+            <form class="forms_form">
+              <fieldset class="forms_fieldset">
+                <div class="forms_field">
+                  <input type="text" class="forms_field-input" required />
+                  <label class="forms_field-label">Email</label>
+                </div>
+                <div class="forms_field">
+                  <input type="password" class="forms_field-input" required />
+                  <label class="forms_field-label">Password</label>
+                </div>
+              </fieldset>
+              <div class="forms_buttons">
+                <button type="button" class="forms_buttons-forgot">
+                  Forgot password?
+                </button>
+                <input
+                  type="submit"
+                  value="Log In"
+                  class="forms_buttons-action"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="user_forms-signup">
+            <h2 class="forms_title">Sign Up</h2>
+            <form class="forms_form">
+              <fieldset class="forms_fieldset">
+                <div class="forms_field">
+                  <input type="text" class="forms_field-input" required />
+                  <label class="forms_field-label"> Full Name </label>
+                </div>
+                <div class="forms_field">
+                  <input type="text" class="forms_field-input" required />
+                  <label class="forms_field-label">Email</label>
+                </div>
+                <div class="forms_field">
+                  <input type="password" class="forms_field-input" required />
+                  <label class="forms_field-label">Password</label>
+                </div>
+              </fieldset>
+              <div class="forms_buttons">
+                <input
+                  type="submit"
+                  value="Sign up"
+                  class="forms_buttons-action"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+                <!-- <v-img :src="getImgUrl('login_form.png')" style="width:100%">
 
                   <v-card-text style="margin-top:150px ">
                     <div class="notranslate" style="padding-left:50px; text-align:center;">
@@ -70,7 +153,7 @@
                       <p style="margin-top: 30px; font-size:12px; color:RGB(255,255,255,0.65)">@provided by HARMONY @2019.07.10 @git:lab.ssafy.com</p>
                     </div>
                   </v-card-text>
-                </v-img>
+                </v-img> -->
               </v-card>
 
             </v-dialog>
@@ -374,7 +457,38 @@ export default {
   }
 }
 </script>
+<script>
+  /**
+   * Variables
+   */
+  const signupButton = document.getElementById('signup-button'),
+    loginButton = document.getElementById('login-button'),
+    userForms = document.getElementById('user_options-forms');
 
+  /**
+   * Add event listener to the "Sign Up" button
+   */
+  signupButton.addEventListener(
+    'click',
+    () => {
+      userForms.classList.remove('bounceRight');
+      userForms.classList.add('bounceLeft');
+    },
+    false,
+  );
+
+  /**
+   * Add event listener to the "Login" button
+   */
+  loginButton.addEventListener(
+    'click',
+    () => {
+      userForms.classList.remove('bounceLeft');
+      userForms.classList.add('bounceRight');
+    },
+    false,
+  );
+</script>
 
 <style>
 .notranslate.v-card.v-sheet.theme--light{

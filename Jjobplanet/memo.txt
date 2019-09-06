@@ -1,0 +1,29 @@
+Terminal
+
+pip install requests
+
+pip install imgurpython
+
+python3
+
+>>> import requests
+>>> import imgurpython
+>>> exit()
+
+
+
+imgur.py
+
+from imgurpython import ImgurClient
+client = ImgurClient(client_id, client_secret)
+
+
+
+imgur homepage
+
+Register an Application에서
+register their application클릭 후
+
+어플name
+타입 - 2번째
+나머지 빈칸
